@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: impact;
+  src: url('/impact.ttf');
+}
+
+body {
+  background-color: #1e1e2e;
+  font-family: impact;
+}
