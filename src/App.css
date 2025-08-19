@@ -2,11 +2,23 @@
 @import "@catppuccin/tailwindcss/mocha.css";
 
 @font-face {
-  font-family: impact;
-  src: url('/impact.ttf');
+  font-family: ComicSansMS;
+  src: url('/ComicSansMS.ttf');
 }
 
 body {
-  background-color: bg-ctp-mantle;
-  font-family: impact;
+  background-color: #181825;
+  font-family: ComicSansMS;
+}
+
+@theme {
+  --animate-movediv: movedown 0.5s ease-in-out forwards;
+  @keyframes movedown {
+    0% {
+      size: 0px;
+    }
+    100% {
+      size: 100px;
+    }
+  }
 }
