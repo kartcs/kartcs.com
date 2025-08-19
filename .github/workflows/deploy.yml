@@ -34,7 +34,7 @@ jobs:
 
       - name: Build website
         run: |
-          yarn install
+          yarn install --ignore-engines
           yarn build
 
       - name: Upload artifact
