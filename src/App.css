@@ -11,14 +11,13 @@ body {
   font-family: ComicSansMS;
 }
 
-@theme {
-  --animate-movediv: movedown 0.5s ease-in-out forwards;
-  @keyframes movedown {
-    0% {
-      size: 0px;
-    }
-    100% {
-      size: 100px;
-    }
+.hoverBounds:hover {
+  .bar {
+    transform: translateY(0px);
   }
+}
+
+.bar {
+  transform: translateY(-4rem);
+  transition: all 0.3s ease-in-out;
 }

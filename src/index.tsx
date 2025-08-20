@@ -16,7 +16,12 @@ function Loading() {
 function App() {
   return (
     <Suspense fallback={<Loading />}>
-      <div>
+      <div className="text-ctp-text">
+        <div className="hoverBounds w-full h-16 flex">
+          <div className="w-full bg-ctp-crust bar">
+            <h1>waddup yo</h1>
+          </div>
+        </div>
         {/* center of screen div */}
         <div className="flex flex-col justify-center items-center h-screen w-screen fixed gap-5">
           <div
@@ -40,32 +45,8 @@ function App() {
             <div className="grid grid-cols-2 grid-rows-2 gap-5]"></div>
           </div>
         </div>
-        <ToolbarMenu />
       </div>
     </Suspense>
-  );
-}
-
-function ToolbarMenu() {
-  const [top, setTop] = useState(0);
-  const [lerp, setLerp] = useState(1);
-
-  useEffect(() => {
-    setInterval(() => {
-      setLerp((p) => {
-        const next = p * 1.05;
-        setTop((t) => t + next);
-		return next;
-      });
-    }, 10);
-  }, []);
-
-  useEffect(() => console.log(top), [top]);
-
-  return (
-    <h1 style={{ top: `${top}px` }} className="text-ctp-text text-lg fixed">
-      a
-    </h1>
   );
 }
 
