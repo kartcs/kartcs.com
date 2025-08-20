@@ -10,14 +10,3 @@ body {
   background-color: #181825;
   font-family: ComicSansMS;
 }
-
-.hoverBounds:hover {
-  .bar {
-    transform: translateY(0px);
-  }
-}
-
-.bar {
-  transform: translateY(-4rem);
-  transition: all 0.3s ease-in-out;
-}

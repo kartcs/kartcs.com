@@ -17,11 +17,12 @@ function App() {
   return (
     <Suspense fallback={<Loading />}>
       <div className="text-ctp-text">
-        <div className="hoverBounds w-full h-16 flex">
-          <div className="w-full bg-ctp-crust bar">
+        <div className="group w-full h-16 flex overflow-hidden">
+          <div className="w-full bg-ctp-crust transform translate-y-[-4rem] transition-all duration-300 ease-in-out group-hover:translate-y-0">
             <h1>waddup yo</h1>
           </div>
         </div>
+
         {/* center of screen div */}
         <div className="flex flex-col justify-center items-center h-screen w-screen fixed gap-5">
           <div
