@@ -1,5 +1,4 @@
-import React, { Suspense } from "react";
-import { Fragment } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./App.css";
 
@@ -20,7 +19,10 @@ function App() {
 			<div>
 				{/* center of screen div */}
 				<div className='flex flex-col justify-center items-center h-screen w-screen fixed gap-5'>
-					<div className='flex flex-col bg-ctp-base w-fit h-fit p-5 rounded-2xl gap-5'>
+					<div
+						className='flex flex-col bg-ctp-base w-fit h-fit p-5 rounded-2xl gap-5'
+						id='hoverArea'
+					>
 						<h1 className='text-ctp-text text-center text-5xl'>
 							Yo.... waddup...
 						</h1>
@@ -39,23 +41,44 @@ function App() {
 					</div>
 				</div>
 				{/* top bar thing area */}
-				<div className='flex items-center justify-center sticky'>
-					<div className='bg-ctp-surface0 flex flex-row h-15 w-fit gap-5 pr-2 pl-2 items-center rounded-full m-2'>
-						<button className='text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250'>
-							cool stuff
-						</button>
-						<img
-							src='/kartBrand.png'
-							alt='Drawing of an orange and white square cat face'
-							className='flex h-15 w-15'
-						/>
-						<button className='text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250'>
-							vidja games
-						</button>
-					</div>
+				<div className='fixed'>
+					<ToolbarMenu moveDir={true} />
 				</div>
 			</div>
 		</Suspense>
+	);
+}
+
+function ToolbarMenu({ moveDir }) {
+	const [top, setTop] = useState(0);
+	const [left, setLeft] = useState(0);
+	const [lerpT, setLerpT] = useState(0);
+	const lowest = 0;
+	const max = 10;
+
+	useEffect(() => {
+		console.log(moveDir, lowest, max, lerpT);
+		if (!moveDir && lerpT > lowest) {
+			setInterval(() => {
+				setTop((prev) => prev + lerpT);
+				setLerpT((prev) => prev * 0.95);
+			}, 10);
+		} else if (moveDir && lerpT < max) {
+			setLerpT((prev) => 0.01);
+			setInterval(() => {
+				setTop((prev) => prev + lerpT);
+				setLerpT((prev) => prev * 1.05);
+			}, 10);
+		}
+	}, [lerpT]);
+
+	return (
+		<h1
+			style={{ top: "${top}px", left: "${left}px" }}
+			className='text-ctp-text text-lg'
+		>
+			a
+		</h1>
 	);
 }
 
