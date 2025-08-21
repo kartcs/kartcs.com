@@ -2,7 +2,9 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router';
 import ReactDOM from 'react-dom/client';
 import './App.css';
-const root = document.getElementById('root');
+import react from '@vitejs/plugin-react-swc';
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 function Loading() {
 	return (
@@ -20,15 +22,13 @@ function Loading() {
 
 function ToolbarButton({ link, children }) {
 	return (
-		<NavLink to={link}>
-			<div
-				className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250"
-				onPointerOver={() => (document.body.style.cursor = 'pointer')}
-				onPointerOut={() => (document.body.style.cursor = 'auto')}
-			>
-				{children}
-			</div>
-		</NavLink>
+		<div
+			className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250"
+			onPointerOver={() => (document.body.style.cursor = 'pointer')}
+			onPointerOut={() => (document.body.style.cursor = 'auto')}
+		>
+			{children}
+		</div>
 	);
 }
 
@@ -56,7 +56,22 @@ function Home() {
 		setMC((prev) => prev + 1);
 		if (IWillKillYou == 20) {
 			console.log('dude');
+			return <div>dude</div>;
 		}
+	}
+
+	function PagesButtonIGuessIdkManIHaveNoIdeaWhatImDoing() {
+		const [page, setPage] = useState<string>('home');
+
+		return (
+			<div>
+				{page === 'home' && <Home />}
+				{page === 'projects' && <Loading />}
+				<button onClick={() => setPage('projects')}>
+					kill all americans
+				</button>
+			</div>
+		);
 	}
 
 	return (
@@ -100,8 +115,8 @@ function Home() {
 				</div> */}
 
 				{/* center of screen div */}
-				<div className="flex justify-center items-center w-full h-screen">
-					<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-2xl gap-5">
+				<div className="flex justify-center items-center w-full h-screen flex-col">
+					<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-tl-2xl rounded-tr-2xl gap-5">
 						<h1 className="text-ctp-text text-center text-5xl">
 							Yo.... waddup...
 						</h1>
@@ -109,17 +124,13 @@ function Home() {
 							welcome to the kart site thing
 						</h1>
 					</div>
+					<div className="flex flex-col bg-ctp-mantle w-400 h-100 p-5 rounded-2xl gap-5">
+						{/* <PagesButtonIGuessIdkManIHaveNoIdeaWhatImDoing /> */}
+					</div>
 				</div>
 			</div>
 		</Suspense>
 	);
 }
 
-ReactDOM.createRoot(root).render(
-	<BrowserRouter>
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/games" element={<Loading />} />
-		</Routes>
-	</BrowserRouter>
-);
+root.render(<Home />);
