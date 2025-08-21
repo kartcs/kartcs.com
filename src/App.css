@@ -1,12 +1,12 @@
-@import "tailwindcss";
-@import "@catppuccin/tailwindcss/mocha.css";
+@import 'tailwindcss';
+@import '@catppuccin/tailwindcss/mocha.css';
 
 @font-face {
-  font-family: ComicSansMS;
-  src: url('/ComicSansMS.ttf');
+	font-family: ComicSansMS;
+	src: url('/assets/fonts/ComicSansMS.ttf');
 }
 
 body {
-  background-color: #181825;
-  font-family: ComicSansMS;
+	background-color: #1e1e2e;
+	font-family: ComicSansMS;
 }
