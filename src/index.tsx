@@ -20,14 +20,19 @@ function Loading() {
 	);
 }
 
-function ToolbarButton({ link, children }) {
+function ToolbarButton({
+	contents,
+	onClick,
+}: {
+	contents: React.ReactNode;
+	onClick: () => any;
+}) {
 	return (
 		<div
-			className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250"
-			onPointerOver={() => (document.body.style.cursor = 'pointer')}
-			onPointerOut={() => (document.body.style.cursor = 'auto')}
+			onClick={onClick}
+			className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250 cursor-pointer"
 		>
-			{children}
+			{contents}
 		</div>
 	);
 }
@@ -44,7 +49,7 @@ function AlertButton({ children, subject, body }) {
 	);
 }
 
-function Home() {
+function Root() {
 	const [IWillKillYou, setMC] = useState(0);
 	const [popupToggle, setPopup] = useState(true);
 	const [popupBody, setBody] = useState('body');
@@ -60,19 +65,26 @@ function Home() {
 		}
 	}
 
-	function PagesButtonIGuessIdkManIHaveNoIdeaWhatImDoing() {
-		const [page, setPage] = useState<string>('home');
-
-		return (
-			<div>
-				{page === 'home' && <Home />}
-				{page === 'projects' && <Loading />}
-				<button onClick={() => setPage('projects')}>
-					kill all americans
-				</button>
+	const [page, setPage] = useState<string>('home');
+	const pages: { [key: string]: React.ReactNode } = {
+		home: (
+			<div className="flex justify-center items-center w-full h-screen flex-col">
+				<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-tl-2xl rounded-tr-2xl gap-5">
+					<h1 className="text-ctp-text text-center text-5xl">
+						Yo.... waddup...
+					</h1>
+					<h1 className="text-ctp-subtext0 text-center text-sm">
+						welcome to the kart site thing
+					</h1>
+				</div>
 			</div>
-		);
-	}
+		),
+		projects: (
+			<div className="flex justify-center items-center w-full h-screen flex-col">
+				<h1>s4mi is awesome</h1>
+			</div>
+		),
+	};
 
 	return (
 		<Suspense fallback={<Loading />}>
@@ -90,13 +102,17 @@ function Home() {
 								/>
 								<img
 									src="/assets/images/kartBrand.png"
-									className="flex h-15 w-15"
+									className="h-15 w-15"
 									onClick={clickTheBart}
 								/>
-								<ToolbarButton
-									children={'vidja games'}
-									link={'/games'}
-								/>
+								{Object.keys(pages).map((e) => (
+									<ToolbarButton
+										contents={
+											e[0].toUpperCase() + e.slice(1)
+										}
+										onClick={() => setPage(e)}
+									/>
+								))}
 							</div>
 						</div>
 					</div>
@@ -115,22 +131,10 @@ function Home() {
 				</div> */}
 
 				{/* center of screen div */}
-				<div className="flex justify-center items-center w-full h-screen flex-col">
-					<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-tl-2xl rounded-tr-2xl gap-5">
-						<h1 className="text-ctp-text text-center text-5xl">
-							Yo.... waddup...
-						</h1>
-						<h1 className="text-ctp-subtext0 text-center text-sm">
-							welcome to the kart site thing
-						</h1>
-					</div>
-					<div className="flex flex-col bg-ctp-mantle w-400 h-100 p-5 rounded-2xl gap-5">
-						{/* <PagesButtonIGuessIdkManIHaveNoIdeaWhatImDoing /> */}
-					</div>
-				</div>
+				{pages[page]}
 			</div>
 		</Suspense>
 	);
 }
 
-root.render(<Home />);
+root.render(<Root />);
