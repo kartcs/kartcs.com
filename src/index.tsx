@@ -45,11 +45,20 @@ function AlertButton({ children, subject, body }) {
 }
 
 function Home() {
+	const [IWillKillYou, setMC] = useState(0);
 	const [popupToggle, setPopup] = useState(true);
 	const [popupBody, setBody] = useState('body');
 	const [popupSub, setSub] = useState('sub');
 	const [popupBGT, setBGT] = useState(0);
 	const [popupT, setT] = useState(0);
+
+	function clickTheBart() {
+		setMC((prev) => prev + 1);
+		if (IWillKillYou == 20) {
+			console.log('dude');
+		}
+	}
+
 	return (
 		<Suspense fallback={<Loading />}>
 			<div className="text-ctp-text">
@@ -67,6 +76,7 @@ function Home() {
 								<img
 									src="/assets/images/kartBrand.png"
 									className="flex h-15 w-15"
+									onClick={clickTheBart}
 								/>
 								<ToolbarButton
 									children={'vidja games'}
