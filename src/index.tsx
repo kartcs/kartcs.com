@@ -108,8 +108,6 @@ function Root() {
 	function clickTheBart() {
 		setMC((prev) => prev + 1);
 		CreatePopup('bro', 'can you not', 'sorry');
-		if (iWillKillYou === 20) {
-		}
 	}
 
 	const [page, setPage] = useState<string>('home');
@@ -162,7 +160,13 @@ function Root() {
 										contents={
 											e[0].toUpperCase() + e.slice(1)
 										}
-										onClick={() => setPage(e)}
+										onClick={() =>
+											CreatePopup(
+												'hold up',
+												'this is kinda work in progress soz',
+												'oh ok'
+											)
+										}
 									/>
 								))}
 							</div>
@@ -170,8 +174,8 @@ function Root() {
 					</div>
 				</div>
 
-				{/* popup */}
 				{fadeStatus ? <Alert /> : null}
+
 				{/* center of screen div */}
 				{pages[page]}
 			</div>
