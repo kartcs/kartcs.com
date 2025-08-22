@@ -44,6 +44,7 @@ function Root() {
 	const [popupClear, setClear] = useState('clear');
 	const [popupBody, setBody] = useState('body');
 	const [popupSub, setSub] = useState('sub');
+	iWillKillYou: Number;
 	fadeStatus: Boolean;
 	popupStatus: Boolean;
 	popupSub: String;
@@ -106,8 +107,8 @@ function Root() {
 
 	function clickTheBart() {
 		setMC((prev) => prev + 1);
+		CreatePopup('bro', 'can you not', 'sorry');
 		if (iWillKillYou === 20) {
-			CreatePopup('bro', 'can you not', 'sorry');
 		}
 	}
 
@@ -115,7 +116,7 @@ function Root() {
 	const pages: { [key: string]: React.ReactNode } = {
 		home: (
 			<div className="flex justify-center items-center w-full h-screen flex-col">
-				<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-tl-2xl rounded-tr-2xl gap-5">
+				<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-2xl gap-5">
 					<h1 className="text-ctp-text text-center text-5xl">
 						Yo.... waddup...
 					</h1>
