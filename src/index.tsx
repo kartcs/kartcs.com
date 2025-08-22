@@ -1,5 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import react from '@vitejs/plugin-react-swc';
@@ -37,31 +36,52 @@ function ToolbarButton({
 	);
 }
 
-function AlertButton({ children, subject, body }) {
-	return (
-		<div
-			className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250"
-			onPointerOver={() => (document.body.style.cursor = 'pointer')}
-			onPointerOut={() => (document.body.style.cursor = 'auto')}
-		>
-			{children}
-		</div>
-	);
-}
-
 function Root() {
 	const [IWillKillYou, setMC] = useState(0);
-	const [popupToggle, setPopup] = useState(true);
+	const [popupStatus, setPopup] = useState(false);
+	const [popupClear, setClear] = useState('clear');
 	const [popupBody, setBody] = useState('body');
 	const [popupSub, setSub] = useState('sub');
-	const [popupBGT, setBGT] = useState(0);
-	const [popupT, setT] = useState(0);
+	popupStatus: Boolean;
+	popupSub: String;
+	popupBody: String;
+	popupClear: String;
+
+	function Alert() {
+		return (
+			<>
+				<div className="flex backdrop-blur-sm h-screen w-screen bg-ctp-mantle/50 items-center justify-center absolute pointer-events-none ${popupState ? animate-[fadeIn_0.5s_ease-in-out_forwards] : animate-[fadeOut_0.5s_ease-in-out_forwards]}" />
+				<div className="flex invisible h-screen w-screen absolute items-center justify-center pointer-events-none">
+					<div className="visible bg-ctp-base w-fit min-w-100 max-w-200 min-h-50 max-h-1080 h-fit flex flex-col rounded-2xl items-center justify-center animate-[fadeIn_0.5s_ease-in-out_forwards]">
+						<div className="invisible h-fit basis-20 w-relative">
+							<h1 className="visible text-ctp-text text-6xl text-center">
+								{popupSub}
+							</h1>
+						</div>
+						<div className="invisible h-fit basis-10 w-relative">
+							<h1 className="visible text-ctp-subtext0 text-2xl text-center">
+								{popupBody}
+							</h1>
+						</div>
+						<div className="invisible h-fit basis-20 w-relative flex justify-center items-center">
+							<button
+								className="visible text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
+								onClick={() => setPopup(false)}
+							>
+								{popupClear}
+							</button>
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	}
 
 	function clickTheBart() {
 		setMC((prev) => prev + 1);
 		if (IWillKillYou == 20) {
 			console.log('dude');
-			return <div>dude</div>;
+			setPopup(true);
 		}
 	}
 
@@ -76,6 +96,12 @@ function Root() {
 					<h1 className="text-ctp-subtext0 text-center text-sm">
 						welcome to the kart site thing
 					</h1>
+					<button
+						onClick={() => setPopup(true)}
+						className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
+					>
+						hello
+					</button>
 				</div>
 			</div>
 		),
@@ -93,13 +119,6 @@ function Root() {
 					<div className="w-full transform translate-y-[-5rem] transition-all duration-400 ease-in-out group-hover:translate-y-0">
 						<div className="bar flex items-center justify-center">
 							<div className="bg-ctp-surface0 flex flex-row h-15 w-fit gap-5 pr-2 pl-2 items-center rounded-full m-2">
-								<AlertButton
-									children={'cool stuff'}
-									subject={'yo'}
-									body={
-										'this page isnt quite finished yet!! check back later perchance'
-									}
-								/>
 								<img
 									src="/assets/images/kartBrand.png"
 									className="h-15 w-15"
@@ -119,17 +138,7 @@ function Root() {
 				</div>
 
 				{/* popup */}
-				{/* <div className='backdrop-blur-3xl h-screen w-screen display-none bg-ctp-crust ${popupToggle ? "" : "hidden"} group opacity-0 focus:opacity-50 duration-500'>
-					<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-2xl gap-5 opacity-0 group-focus:opacity-100 duration-300">
-						<h1 className="text-ctp-text text-center text-5xl">
-							{popupSub}
-						</h1>
-						<h1 className="text-ctp-subtext0 text-center text-sm">
-							{popupBody}
-						</h1>
-					</div>
-				</div> */}
-
+				{popupStatus ? <Alert /> : null}
 				{/* center of screen div */}
 				{pages[page]}
 			</div>

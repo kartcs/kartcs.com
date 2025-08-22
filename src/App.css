@@ -10,3 +10,24 @@ body {
 	background-color: #1e1e2e;
 	font-family: ComicSansMS;
 }
+
+@theme {
+	--animate-fadeOut: fadeOut 1.5s ease-in forwards;
+	@keyframes fadeOut {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+	--animate-fadeIn: fadeIn 1.5s ease-in forwards;
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
