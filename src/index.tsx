@@ -37,11 +37,14 @@ function ToolbarButton({
 }
 
 function Root() {
-	const [IWillKillYou, setMC] = useState(0);
+	const [iWillKillYou, setMC] = useState(0);
+
+	const [fadeStatus, setFade] = useState(false);
 	const [popupStatus, setPopup] = useState(false);
 	const [popupClear, setClear] = useState('clear');
 	const [popupBody, setBody] = useState('body');
 	const [popupSub, setSub] = useState('sub');
+	fadeStatus: Boolean;
 	popupStatus: Boolean;
 	popupSub: String;
 	popupBody: String;
@@ -50,9 +53,21 @@ function Root() {
 	function Alert() {
 		return (
 			<>
-				<div className="flex backdrop-blur-sm h-screen w-screen bg-ctp-mantle/50 items-center justify-center absolute pointer-events-none ${popupState ? animate-[fadeIn_0.5s_ease-in-out_forwards] : animate-[fadeOut_0.5s_ease-in-out_forwards]}" />
-				<div className="flex invisible h-screen w-screen absolute items-center justify-center pointer-events-none">
-					<div className="visible bg-ctp-base w-fit min-w-100 max-w-200 min-h-50 max-h-1080 h-fit flex flex-col rounded-2xl items-center justify-center animate-[fadeIn_0.5s_ease-in-out_forwards]">
+				<div
+					className={`flex backdrop-blur-sm h-screen w-screen bg-ctp-mantle/50 items-center justify-center absolute ${
+						popupStatus
+							? 'animate-[fadeIn_0.5s_ease-in-out_forwards] pointer-events-auto'
+							: 'animate-[fadeOut_0.5s_ease-in-out_forwards] pointer-events-none'
+					}`}
+				/>
+				<div
+					className={`flex invisible h-screen w-screen absolute items-center justify-center ${
+						popupStatus
+							? 'animate-[fadeIn_0.5s_ease-in-out_forwards] pointer-events-auto'
+							: 'animate-[fadeOut_0.5s_ease-in-out_forwards] pointer-events-none'
+					}`}
+				>
+					<div className="visible bg-ctp-base w-fit min-w-100 max-w-200 min-h-50 max-h-1080 p-5 h-fit flex flex-col rounded-2xl items-center">
 						<div className="invisible h-fit basis-20 w-relative">
 							<h1 className="visible text-ctp-text text-6xl text-center">
 								{popupSub}
@@ -77,11 +92,22 @@ function Root() {
 		);
 	}
 
+	function CreatePopup(subT, bodyT, clearT) {
+		subT: String;
+		bodyT: String;
+		clearT: String;
+
+		setFade(true);
+		setSub(subT);
+		setBody(bodyT);
+		setClear(clearT);
+		setPopup(true);
+	}
+
 	function clickTheBart() {
 		setMC((prev) => prev + 1);
-		if (IWillKillYou == 20) {
-			console.log('dude');
-			setPopup(true);
+		if (iWillKillYou === 20) {
+			CreatePopup('bro', 'can you not', 'sorry');
 		}
 	}
 
@@ -97,7 +123,13 @@ function Root() {
 						welcome to the kart site thing
 					</h1>
 					<button
-						onClick={() => setPopup(true)}
+						onClick={() =>
+							CreatePopup(
+								'hello',
+								'heyyyy haiiii heyyy heeyyyoooo heiiiii haiii :3',
+								'leave me alone'
+							)
+						}
 						className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
 					>
 						hello
@@ -138,7 +170,7 @@ function Root() {
 				</div>
 
 				{/* popup */}
-				{popupStatus ? <Alert /> : null}
+				{fadeStatus ? <Alert /> : null}
 				{/* center of screen div */}
 				{pages[page]}
 			</div>

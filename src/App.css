@@ -14,10 +14,7 @@ body {
 @theme {
 	--animate-fadeOut: fadeOut 1.5s ease-in forwards;
 	@keyframes fadeOut {
-		0% {
-			opacity: 1;
-		}
-		100% {
+		to {
 			opacity: 0;
 		}
 	}
