@@ -37,19 +37,11 @@ function ToolbarButton({
 }
 
 function Root() {
-	const [iWillKillYou, setMC] = useState(0);
-
 	const [fadeStatus, setFade] = useState(false);
 	const [popupStatus, setPopup] = useState(false);
 	const [popupClear, setClear] = useState('clear');
 	const [popupBody, setBody] = useState('body');
 	const [popupSub, setSub] = useState('sub');
-	iWillKillYou: Number;
-	fadeStatus: Boolean;
-	popupStatus: Boolean;
-	popupSub: String;
-	popupBody: String;
-	popupClear: String;
 
 	function Alert() {
 		return (
@@ -93,11 +85,11 @@ function Root() {
 		);
 	}
 
-	function CreatePopup(subT, bodyT, clearT) {
-		subT: String;
-		bodyT: String;
-		clearT: String;
-
+	function CreatePopup(
+		subT: React.SetStateAction<string>,
+		bodyT: React.SetStateAction<string>,
+		clearT: React.SetStateAction<string>
+	) {
 		setFade(true);
 		setSub(subT);
 		setBody(bodyT);
@@ -106,7 +98,6 @@ function Root() {
 	}
 
 	function clickTheBart() {
-		setMC((prev) => prev + 1);
 		CreatePopup('bro', 'can you not', 'sorry');
 	}
 
