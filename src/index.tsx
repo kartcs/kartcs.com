@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
-import react from '@vitejs/plugin-react-swc';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
@@ -66,11 +65,13 @@ function Root() {
 								{popupSub}
 							</h1>
 						</div>
+						<br />
 						<div className="invisible h-fit basis-10 w-relative">
 							<h1 className="visible text-ctp-subtext0 text-2xl text-center">
 								{popupBody}
 							</h1>
 						</div>
+						<br />
 						<div className="invisible h-fit basis-20 w-relative flex justify-center items-center">
 							<button
 								className="visible text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
@@ -101,28 +102,35 @@ function Root() {
 		CreatePopup('bro', 'can you not', 'sorry');
 	}
 
+	function PageButtonAction(e: React.SetStateAction<string>) {
+		setFade(false);
+		setPage(e);
+	}
+
 	const [page, setPage] = useState<string>('home');
 	const pages: { [key: string]: React.ReactNode } = {
 		home: (
 			<div className="flex justify-center items-center w-full h-screen flex-col">
-				<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-2xl gap-5">
-					<h1 className="text-ctp-text text-center text-5xl">
-						Yo.... waddup...
+				<div className="flex flex-col bg-ctp-mantle w-fit h-fit p-5 rounded-2xl gap-5 items-center">
+					<h1 className="text-ctp-text text-center text-4xl">
+						hello bro
 					</h1>
-					<h1 className="text-ctp-subtext0 text-center text-sm">
-						welcome to the kart site thing
+					<br/>
+					<h1 className="text-ctp-subtext0 text-center text-2xl">
+						welcome to the kart site thing <br/> this site isnt even close to finished, so there isnt much yet <br/>you can still look around though!!!
 					</h1>
+					<br/>
 					<button
 						onClick={() =>
 							CreatePopup(
-								'hello',
-								'heyyyy haiiii heyyy heeyyyoooo heiiiii haiii :3',
-								'leave me alone'
+								'great question',
+								`hover at the top of the screen to show the toolbar!! thats about it!!`,
+								'ok thanks'
 							)
 						}
-						className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
+						className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer w-fit"
 					>
-						hello
+						what am i doing here
 					</button>
 				</div>
 			</div>
@@ -151,13 +159,7 @@ function Root() {
 										contents={
 											e[0].toUpperCase() + e.slice(1)
 										}
-										onClick={() =>
-											CreatePopup(
-												'hold up',
-												'this is kinda work in progress soz',
-												'oh ok'
-											)
-										}
+										onClick={() => PageButtonAction(e)}
 									/>
 								))}
 							</div>
@@ -167,7 +169,6 @@ function Root() {
 
 				{fadeStatus ? <Alert /> : null}
 
-				{/* center of screen div */}
 				{pages[page]}
 			</div>
 		</Suspense>
