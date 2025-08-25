@@ -6,8 +6,18 @@
 	src: url('/assets/fonts/ComicSansMS.ttf');
 }
 
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #eff1f5;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e1e2e;
+    }
+}
+
 body {
-	background-color: #1e1e2e;
 	font-family: ComicSansMS;
 }
 

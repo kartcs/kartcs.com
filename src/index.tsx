@@ -41,7 +41,7 @@ function ToolbarButton({
 	return (
 		<div
 			onClick={onClick}
-			className="text-center text-ctp-peach border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle transition duration-250 cursor-pointer"
+			className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle/50 transition duration-250 cursor-pointer"
 		>
 			{contents}
 		</div>
@@ -129,14 +129,14 @@ function Root() {
 			<div className={`fixed flex flex-row h-fit w-108 justify-end ${website && source !== '' ? 'gap-2' : ''}`}>
 				<div 
 					onClick={() => {!website.includes("https://") ? setPage(website) : window.open(website)}}
-					className={`${website == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-peach/40 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/80 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
+					className={`${website == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-surface0/80 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/40 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
 					<LinkIcon 
 						className='size-6'
 					/>
 				</div>
 				<div 
 					onClick={() => window.open(source)}
-					className={`${source == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-peach/40 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/80 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
+					className={`${source == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-surface0/80 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/40 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
 					<CodeBracketIcon 
 						className='size-6'
 					/>
@@ -166,7 +166,7 @@ function Root() {
 								'ok thanks'
 							)
 						}
-						className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer w-fit"
+						className="text-center text-ctp-text border-2 bg-ctp-surface0 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer w-fit"
 					>
 						what am i doing here
 					</button>
@@ -259,16 +259,16 @@ function Root() {
 					<div className="w-full transform translate-y-[-5rem] transition-all duration-400 ease-in-out group-hover:translate-y-0">
 						<div className="bar flex items-center justify-center">
 							<div className="bg-ctp-surface0 flex flex-row h-15 w-fit gap-5 pr-2 pl-2 items-center rounded-full m-2">
-								<img
-									src="/assets/images/kartBrand.png"
-									className="h-15 w-15"
-									onClick={clickTheBart}
-								/>
 								<ToolbarButton
 									contents={
 										'Home'
 									}
 									onClick={() => PageButtonAction('home')}
+								/>
+								<img
+									src="/assets/images/kartBrand.png"
+									className="h-15 w-15"
+									onClick={clickTheBart}
 								/>
 								<ToolbarButton
 									contents={
