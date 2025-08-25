@@ -210,7 +210,7 @@ function Root() {
 								<h1 className='whitespace-nowrap text-left select-none'>
 									This Site
 								</h1>
-								<LinkButtons source={'https://github.com/kartcs/main-kartcs.github.io'} website={''} />
+								<LinkButtons source={'https://github.com/kartcs/kartcs.com'} website={''} />
 							</div>
 							<h1 className='text-sm text-ctp-subtext0 select-none'>
 								if you check the source, sorry in advance<br/>
