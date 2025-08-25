@@ -128,7 +128,7 @@ function Root() {
 		return (
 			<div className={`fixed flex flex-row h-fit w-108 justify-end ${website && source !== '' ? 'gap-2' : ''}`}>
 				<div 
-					onClick={() => {website !== "https://\*" ? setPage(website) : window.open(website)}}
+					onClick={() => {!website.includes("https://") ? setPage(website) : window.open(website)}}
 					className={`${website == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-peach/40 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/80 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
 					<LinkIcon 
 						className='size-6'
