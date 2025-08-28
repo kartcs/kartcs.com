@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "^2.2.0",
+		"@iconify-icon/react": "^3.0.0",
 		"@react-three/postprocessing": "^3.0.4",
 		"@tailwindcss/vite": "^4.1.12",
 		"@vitejs/plugin-react": "^5.0.1",
