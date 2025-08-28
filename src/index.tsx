@@ -14,6 +14,7 @@ import {
 	ComputerDesktopIcon,
 	WindowIcon
 } from '@heroicons/react/24/outline'
+import Projects from './pages/Projects.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
@@ -173,73 +174,7 @@ function Root() {
 				</div>
 			</div>
 		),
-		projects: (
-			<div className="flex justify-center items-center w-full h-screen flex-col fixed pointer-events-none z-0">
-				<div className='flex pointer-events-auto flex-col w-150 h-fit min-h-75 max-h-150 rounded-2xl bg-ctp-mantle overflow-hidden items-center p-5 gap-2.5'>
-					<div className='text-center'>
-						<h1 className='text-ctp-text text-5xl'>projects</h1>
-						<br/>
-						<h1 className='text-ctp-subtext0 text-2xl'>random things i may or may not be proud of!!</h1>
-						<br/>
-					</div>
-
-					{/* if anyone can tell me how on earth to add those icons to a component (editable) i will rejoice (and, like, fix the major lack of components) */}
-
-					<div className='flex transition-all overflow-hidden rounded-2xl w-140 h-25 bg-ctp-crust p-3 pl-5 pr-5 flex-row gap-5 origin-top group hover:h-40 duration-200 ease-out'>
-						<Cog6ToothIcon
-							className='size-19 group-hover:translate-y-7 transition-all ease-out duration-200'
-						/>
-						<div className='flex-col text-lg text-ctp-text'>
-							<div className='flex flex-row'>
-								<h1 className='whitespace-nowrap text-left select-none'>
-									Heart Attack
-								</h1>
-								<LinkButtons source={'https://github.com/kartcs/HeartAttack'} website={'https://geode-sdk.org/mods/kart.heartattack'} />
-							</div>
-							<h1 className='text-sm text-ctp-subtext0 select-none'>
-								mod for Geometry Dash running Geode<br/>gives the player a small chance to randomly die each attempt.<br/><br/>thats literally it<br/>i made it in like a day
-							</h1>
-						</div>
-					</div>
-					<div className='flex transition-all overflow-hidden rounded-2xl w-140 h-25 bg-ctp-crust p-3 pl-5 pr-5 flex-row gap-5 origin-top group hover:h-40 duration-200 ease-out'>
-						<WindowIcon
-							className='size-19 group-hover:translate-y-7 transition-all ease-out duration-200'
-						/>
-						<div className='flex-col text-lg text-ctp-text'>
-							<div className='flex flex-row'>
-								<h1 className='whitespace-nowrap text-left select-none'>
-									This Site
-								</h1>
-								<LinkButtons source={'https://github.com/kartcs/kartcs.com'} website={''} />
-							</div>
-							<h1 className='text-sm text-ctp-subtext0 select-none'>
-								if you check the source, sorry in advance<br/>
-								like actually its really bad<br/>
-								<br/>
-								i mean its probably not bad if you cant read<br/>
-								but you probably can (sorry)
-							</h1>
-						</div>
-					</div>
-					<div className='flex transition-all overflow-hidden rounded-2xl w-140 h-25 bg-ctp-crust p-3 pl-5 pr-5 flex-row gap-5 origin-top group hover:h-40 duration-200 ease-out'>
-						<ComputerDesktopIcon
-							className='size-19 group-hover:translate-y-7 transition-all ease-out duration-200'
-						/>
-						<div className='flex-col text-lg text-ctp-text'>
-							<div className='flex flex-row'>
-								<h1 className='whitespace-nowrap text-left select-none'>
-									T.O.D. 2
-								</h1>
-								<LinkButtons source={''} website={'tod2'} />
-							</div>
-							<h1 className='text-sm text-ctp-subtext0 select-none'>
-								(T)ods (O)f (D)eath (2) <br/>game based entirely off of a dead joke from years ago<br/><br/>it has like 2 features so far<br/>not sure why im still working on it
-							</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		),
+		projects: <Projects setPage={setPage}/>,
 		tod2: (
 			<div className="flex justify-center items-center w-full h-screen flex-col">
 				<div className="flex flex-col bg-ctp-mantle w-fit h-fit max-h-1/2 max-w-1/2 p-5 rounded-2xl gap-5 items-center">
