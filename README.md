@@ -1,2 +1,2 @@
-# main-kartcs.github.io
-main site page perchance who knows
+# kartcs.com
+actual website instead of framer slop!!!! !!!!!!!!!
