@@ -1,227 +1,291 @@
-import React, { Suspense, SVGProps, useEffect, useRef, useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
 import './App.css';
-
-import { 
-	BeakerIcon,
-	ArrowTopRightOnSquareIcon,
-	CodeBracketIcon,
-	LinkIcon
- } from '@heroicons/react/16/solid'
-
-import {
-	Cog6ToothIcon,
-	ComputerDesktopIcon,
-	WindowIcon
-} from '@heroicons/react/24/outline'
-import Projects from './pages/Projects.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
-function Loading() {
+function Directory() {
+	let navigate = useNavigate();
+
 	return (
-		<div className="flex justify-center items-center h-screen w-screen absolute bg-ctp-base z-50">
-			<div className="flex flex-row justify-center items-center w-70 h-20 bg-ctp-surface0 rounded-full gap-4">
-				<img
-					src="/assets/images/loadingCircle.png"
-					className="animate-spin size-15"
-				/>
-				<h1 className="text-ctp-peach text-3xl">LOADING...</h1>
+		<div className='flex w-full p-2 bg-[#FFFFFF] border-3 border-solid border-black h-fit list-disc text-[#0000FF] text-[16px] underline flex-col gap-1 pl-6'>
+			<li className='hover:cursor-pointer' onClick={() => navigate("/")} title='The home page of sorts'>
+				Main
+			</li>
+			<li className='hover:cursor-pointer' onClick={() => navigate("/About")} title='About me!!'>
+				About me
+			</li>
+			{/* <li className='hover:cursor-pointer' onClick={() => navigate("/Projects")} title='Things I created or had a hand in bringing into this world'>
+				Projects
+			</li> */}
+			<li className='hover:cursor-pointer' onClick={() => navigate("/Links")} title='Things I like and cool people and everything else'>
+				Links
+			</li>
+			<li className='hover:cursor-pointer' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
+				It is I
+			</li>
+		</div>
+	);
+}
+
+function VerticalAd(props: { file: string; destination: string;}) {
+	let navigate = useNavigate();
+
+	return (
+		<div className='h-[240px] w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain'>
+			<img className='w-full h-full hover:cursor-pointer' onClick={() => navigate(`${props.destination}`)} src={`${props.file}`}/>
+			<div className='w-fit h-fit text-[10px] hover:cursor-pointer' onClick={() => navigate("/Ads")}>
+				ad
+			</div>
+		</div>
+	)
+}
+
+function TinyButton(props: { file: string; destination: string; newtab: boolean; title: string;}) {
+	let navigate = useNavigate();
+
+	return (
+		<img className='w-[88px] h-[31px] hover:cursor-pointer' title={`${props.title}`} src={`${props.file}`} onClick={() => `${props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)}`}/>
+	)
+}
+
+function MainPage() {
+	let navigate = useNavigate();
+
+	return (
+		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
+			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+				<h1>kart.cat</h1>
+				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+			</div>
+			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
+			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+				welcome to kart.cat... some cool stuff may be here... eventually...
+			</div>
+			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<Directory/>
+					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+				</div>
+				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
+					<a>this is my awesome site... except i have practically nothing to put here... yet...</a>
+					<br/>
+					<br/> {/* i HAVE to find a better way to do ts */}
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
+					<a>i was bored</a>
+					<br/>
+					<br/>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why does it look like this</h1>
+					<a>i was bored</a>
+					<br/>
+					<br/>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What do I do here?</h1>
+					<a>welcome to kart cat... this is kart cat... welcome... this is kart cat, welcome, to kart cat... you can do anything at kart cat... anything at all... the only limit is yourself... welcome... to kart cat... welcome, to kart CAT... this IS kart CAT... WELCOME... to KART cat...</a>
+					<br/>
+					<br/>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
+					<a>heres a cat picture i like a lot (you may need to zoom in)</a>
+					<img className='h-[40px] w-[60px]' src='https://pbs.twimg.com/media/HDFhnTKWIAAaJwj?format=jpg&name=900x900'/>
+					<br/>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Help</h1>
+					<a>just click on stuff something will happen probably</a>
+					<br/>
+					<br/>
+					<a>probably</a>
+				</div>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+				</div>
 			</div>
 		</div>
 	);
 }
 
-function ToolbarButton({
-	contents,
-	onClick,
-}: {
-	contents: React.ReactNode;
-	onClick: () => any;
-}) {
+function Ads() {
+	let navigate = useNavigate();
+
 	return (
-		<div
-			onClick={onClick}
-			className="text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full flex justify-center items-center hover:bg-ctp-mantle/50 transition duration-250 cursor-pointer"
-		>
-			{contents}
+		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
+			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+				<h1>kart.cat &gt; ads</h1>
+				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+			</div>
+			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
+			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+				cool info about the "ads" on the site...
+			</div>
+			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<Directory/>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+				</div>
+				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
+					<a>the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, etc. no you cannot have an ad</a>
+					<br/>
+					<br/> {/* kill them all */}
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
+					<a>i felt like it</a>
+				</div>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/About'/>
+				</div>
+			</div>
 		</div>
-	);
+	)
 }
 
-function Root() {
-	const [fadeStatus, setFade] = useState(false);
-	const [popupStatus, setPopup] = useState(false);
-	const [popupClear, setClear] = useState('clear');
-	const [popupBody, setBody] = useState('body');
-	const [popupSub, setSub] = useState('sub');
-
-	function Alert() {
-		return (
-			<>
-				<div
-					className={`flex backdrop-blur-sm h-screen w-screen bg-ctp-mantle/50 items-center justify-center absolute z-10 ${
-						popupStatus
-							? 'animate-[fadeIn_0.5s_ease-in-out_forwards] pointer-events-auto'
-							: 'animate-[fadeOut_0.5s_ease-in-out_forwards] pointer-events-none'
-					}`}
-				/>
-				<div
-					className={`z-20 flex invisible h-screen w-screen absolute items-center justify-center ${
-						popupStatus
-							? 'animate-[fadeIn_0.5s_ease-in-out_forwards] pointer-events-auto'
-							: 'animate-[fadeOut_0.5s_ease-in-out_forwards] pointer-events-none'
-					}`}
-				>
-					<div className="visible bg-ctp-base w-fit min-h-50 min-w-100 max-h-1/2 max-w-1/2 p-5 h-fit flex flex-col rounded-2xl items-center">
-						<div className="invisible h-fit basis-20 w-relative">
-							<h1 className="visible text-ctp-text text-6xl text-center">
-								{popupSub}
-							</h1>
-						</div>
-						<div className="invisible h-fit basis-10 w-relative">
-							<h1 className="visible text-ctp-subtext0 text-2xl text-center">
-								{popupBody}
-							</h1>
-						</div>
-						<div className="invisible h-fit basis-20 w-relative flex justify-center items-center">
-							<button
-								className="visible text-center text-ctp-text border-2 bg-ctp-surface0 pl-5 pr-5 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer"
-								onClick={() => setPopup(false)}
-							>
-								{popupClear}
-							</button>
-						</div>
-					</div>
-				</div>
-			</>
-		);
-	}
-
-	function CreatePopup(
-		subT: string,
-		bodyT: string,
-		clearT: string
-	) {
-		setFade(true);
-		setSub(subT);
-		setBody(bodyT);
-		setClear(clearT);
-		setPopup(true);
-	}
-
-	function clickTheBart() {
-		CreatePopup('bro', 'can you not', 'sorry');
-	}
-
-	function PageButtonAction(e: React.SetStateAction<string>) {
-		setFade(false);
-		setPage(e);
-	}
-
-	function LinkButtons({
-		website,
-		source
-	}: {
-		website: string,
-		source: string
-	}) {
-		return (
-			<div className={`fixed flex flex-row h-fit w-108 justify-end ${website && source !== '' ? 'gap-2' : ''}`}>
-				<div 
-					onClick={() => {!website.includes("https://") ? setPage(website) : window.open(website)}}
-					className={`${website == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-surface0/80 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/40 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
-					<LinkIcon 
-						className='size-6'
-					/>
-				</div>
-				<div 
-					onClick={() => window.open(source)}
-					className={`${source == "" ? 'invisible h-0 w-0' : 'cursor-pointer h-fit w-fit items-center justify-center opacity-0 hover:bg-ctp-surface0/80 p-1 group-hover:opacity-100 group-hover:bg-ctp-surface0/40 rounded-[.75vw] hover:rounded-[.5vw] duration-200 ease-in-out transition-all'}`}>
-					<CodeBracketIcon 
-						className='size-6'
-					/>
-				</div>
-			</div>
-		)
-	}
-
-	const [page, setPage] = useState<string>('home');
-	const pages: { [key: string]: React.ReactNode } = {
-		home: (
-			<div className="flex justify-center items-center w-full h-screen flex-col">
-				<div className="flex flex-col bg-ctp-mantle w-fit h-fit max-h-1/2 max-w-1/2 p-5 rounded-2xl gap-5 items-center">
-					<h1 className="text-ctp-text text-center text-5xl">
-						hello
-					</h1>
-					<br/>
-					<h1 className="text-ctp-subtext0 text-center text-2xl">
-						welcome to the kart site thing <br/> this site isnt even close to finished, so there isnt much yet <br/>you can still look around though!!!<br/><br/>(also its entirely broken on mobile)
-					</h1>
-					<br/>
-					<button
-						onClick={() =>
-							CreatePopup(
-								'great question',
-								`hover at the top of the screen to show the toolbar!! thats about it!!`,
-								'ok thanks'
-							)
-						}
-						className="text-center text-ctp-text border-2 bg-ctp-surface0 p-2 rounded-full hover:bg-ctp-surface1 transition duration-250 cursor-pointer w-fit"
-					>
-						what am i doing here
-					</button>
-				</div>
-			</div>
-		),
-		projects: <Projects setPage={setPage}/>,
-		tod2: (
-			<div className="flex justify-center items-center w-full h-screen flex-col">
-				<div className="flex flex-col bg-ctp-mantle w-fit h-fit max-h-1/2 max-w-1/2 p-5 rounded-2xl gap-5 items-center">
-					<div className='grid-rows-2 gap-5 w-fit h-fit bg-ctp-mantle'>
-						<div className='w-80 h-42 bg-[url(/assets/images/games/tod2/img1.png)] bg-cover bg-center rounded-2xl'/>
-						<p>that is the only image i have</p>
-					</div>
-				</div>
-			</div>
-		),
-	};
+function About() {
+	let navigate = useNavigate();
 
 	return (
-		<Suspense fallback={<Loading />}>
-			<div className="text-ctp-text">
-				<div className="group w-full fixed overflow-hidden h-1/12 z-5">
-					<div className="w-full transform translate-y-[-5rem] transition-all duration-400 ease-in-out group-hover:translate-y-0">
-						<div className="bar flex items-center justify-center">
-							<div className="bg-ctp-surface0 flex flex-row h-15 w-fit gap-5 pr-2 pl-2 items-center rounded-full m-2">
-								<ToolbarButton
-									contents={
-										'Home'
-									}
-									onClick={() => PageButtonAction('home')}
-								/>
-								<img
-									src="/assets/images/kartBrand.png"
-									className="h-15 w-15"
-									onClick={clickTheBart}
-								/>
-								<ToolbarButton
-									contents={
-										'Projects'
-									}
-									onClick={() => PageButtonAction('projects')}
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{fadeStatus ? <Alert /> : null}
-
-				{pages[page]}
+		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
+			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+				<h1>kart.cat &gt; about</h1>
+				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
 			</div>
-		</Suspense>
-	);
+			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
+			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+				hello thats me...
+			</div>
+			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<Directory/>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+				</div>
+				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
+					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>hello</h1>
+					<a>hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)</a>
+					<br/>
+					<a>i do unity and blender stuff sometimes (like very rarely)</a>
+					<br/>
+					<br/>
+					<a>and thats IT... literally theres nothing else</a>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/> {/* DUDE */}
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<a>genuinely</a>
+				</div>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+				</div>
+			</div>
+		</div>
+	)
 }
 
-root.render(<Root />);
+function Links() {
+	let navigate = useNavigate();
+
+	return (
+		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
+			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+				<h1>kart.cat &gt; links</h1>
+				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+			</div>
+			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
+			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+				cool things and people and things...
+			</div>
+			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<Directory/>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+				</div>
+				<div className='w-full h-full bg-white flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
+					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>me</h1>
+						<div className='flex flex-row items-center justify-self gap-5'>
+							<TinyButton file='/assets/badges/awesomecord.png' title='discord' destination='https://discord.com/users/361575984639770625' newtab={true}/>
+							<TinyButton file='/assets/badges/thetwitter.png' title='twitter' destination='https://twitter.com/kartdoesunity' newtab={true}/>
+							<TinyButton file='/assets/badges/thegithub.png' title='github' destination='https://github.com/kartcs' newtab={true}/>
+						</div>
+					</div>
+					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>the goats</h1>
+						<div className='flex flex-row items-center justify-self gap-5'>
+							<TinyButton file='/assets/badges/sadiead.gif' title='sadie my goat' destination='https://sadie.cat' newtab={true}/>
+						</div>
+					</div>
+					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>other things</h1>
+						<div className='flex flex-row items-center justify-self gap-5'>
+							<TinyButton file='/assets/badges/88x31.gif' title='88x31 resource (very cool (except i didnt use any))' destination='https://cyber.dabamos.de/88x31/index.html' newtab={true}/>
+						</div>
+					</div>
+					<div className='w-full h-full p-2 items-center justify-center flex flex-col'>
+						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>i dont have anything else to put here</h1>
+					</div>
+				</div>
+				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+function ItisI() {
+	let navigate = useNavigate();
+
+	return (
+		<div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black'>
+			<div className='bg-[url(/assets/images/itisi.jpg)] h-[500px] w-[500px] bg-contain' title='itisi.jpg'/>
+			<a className='hover:cursor-pointer text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
+		</div>
+	)
+}
+
+function NotFound() {
+	let navigate = useNavigate();
+
+	return (
+		<div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black'>
+			<img src='https://http.cat/images/404.jpg'/>
+			<a className='hover:cursor-pointer text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
+		</div>
+	)
+}
+
+function App() {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<MainPage/>}/>
+				<Route path="/About" element={<About/>}/>
+				<Route path="/Ads" element={<Ads/>}/>
+				<Route path="/Links" element={<Links/>}/>
+				<Route path="/itisi" element={<ItisI/>}/>
+				<Route path="*" element={<NotFound/>}/>
+			</Routes>
+		</BrowserRouter>
+	)
+}
+
+root.render(<App/>);

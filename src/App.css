@@ -1,27 +1,17 @@
 @import 'tailwindcss';
-@import '@catppuccin/tailwindcss/mocha.css';
 
 @font-face {
-	font-family: ComicSansMS;
-	src: url('/assets/fonts/ComicSansMS.ttf');
-}
-
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: #eff1f5;
-    }
-}
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1e1e2e;
-    }
+	font-family: Hack;
+	src: url('/assets/fonts/Hack-Regular.ttf');
 }
 
 body {
-	font-family: ComicSansMS;
+	font-family: Hack;
 }
 
 @theme {
+	--kart-color: #FF8702;
+
 	--animate-fadeOut: fadeOut 1.5s ease-in forwards;
 	@keyframes fadeOut {
 		to {
@@ -35,6 +25,16 @@ body {
 		}
 		100% {
 			opacity: 1;
+		}
+	}
+
+	--animate-scrollimage: scroll 60s linear infinite;
+	@keyframes scroll {
+		0% {
+			background-position: 0px 0px;
+		}
+		100% {
+			background-position: 500px 0px;
 		}
 	}
 }
