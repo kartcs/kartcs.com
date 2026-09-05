@@ -6,36 +6,36 @@ import './App.css';
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 function Directory() {
-	let navigate = useNavigate();
+    let navigate = useNavigate();
 
-	return (
-		<div className='flex w-full p-2 bg-[#FFFFFF] border-3 border-solid border-black h-fit list-disc text-[#0000FF] text-[16px] underline flex-col gap-1 pl-6'>
-			<li className='hover:cursor-pointer' onClick={() => navigate("/")} title='The home page of sorts'>
-				Main
-			</li>
-			<li className='hover:cursor-pointer' onClick={() => navigate("/About")} title='About me!!'>
-				About me
-			</li>
-			{/* <li className='hover:cursor-pointer' onClick={() => navigate("/Projects")} title='Things I created or had a hand in bringing into this world'>
-				Projects
-			</li> */}
-			<li className='hover:cursor-pointer' onClick={() => navigate("/Links")} title='Things I like and cool people and everything else'>
-				Links
-			</li>
-			<li className='hover:cursor-pointer' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
-				It is I
-			</li>
-		</div>
-	);
+    return (
+        <div className='flex w-full p-2 bg-[#FFFFFF] border-3 border-solid border-black h-fit list-disc text-[#0000FF] text-[14px] md:text-[16px] underline flex-col gap-1 pl-4 md:pl-6'>
+            <li className='hover:cursor-pointer' onClick={() => navigate("/")} title='The home page of sorts'>
+                Main
+            </li>
+            <li className='hover:cursor-pointer' onClick={() => navigate("/About")} title='About me!!'>
+                About me
+            </li>
+            <li className='hover:cursor-pointer' onClick={() => navigate("/Projects")} title='Things I created or had a hand in bringing into this world'>
+                Projects
+            </li>
+            <li className='hover:cursor-pointer' onClick={() => navigate("/Links")} title='Things I like and cool people and everything else'>
+                Links
+            </li>
+            <li className='hover:cursor-pointer' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
+                It is I
+            </li>
+        </div>
+    );
 }
 
 function VerticalAd(props: { file: string; destination: string; newtab?: boolean }) {
     let navigate = useNavigate();
 
     return (
-        <div className='h-[240px] w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain'>
+        <div className='h-[200px] w-[100px] md:h-[240px] md:w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain bg-no-repeat'>
             <img 
-                className='w-full h-full hover:cursor-pointer' 
+                className='w-full h-full hover:cursor-pointer object-contain' 
                 onClick={() => props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)} 
                 src={props.file}
             />
@@ -47,16 +47,14 @@ function VerticalAd(props: { file: string; destination: string; newtab?: boolean
 }
 
 interface IAd {
-	src: string;
-	link: string;
-	newTab: string;
+    src: string;
+    link: string;
+    newTab: string;
 }
 
 function stringToBool(str: string): boolean {
-	return str.toLowerCase() === 'true';
+    return str.toLowerCase() === 'true';
 }
-
-// there is most certainly a better way to do this
 
 const adDict: { [id: number] : IAd; } = {};
 adDict[0] = { src: "/assets/ads/incomplete.png", link : "/incomplete", newTab : "false" }
@@ -73,86 +71,74 @@ adDict[10] = { src: "/assets/ads/coolios.png", link : "https://coolios.artstatio
 adDict[11] = { src: "/assets/ads/40c.png", link : "/incomplete", newTab : "false" }
 adDict[12] = { src: "/assets/ads/commatose.png", link : "/incomplete", newTab : "false" }
 adDict[13] = { src: "/assets/ads/unreal.png", link : "/incomplete", newTab : "false" }
-// adDict[14] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[15] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[16] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[17] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[18] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[19] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
-// adDict[20] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+adDict[14] = { src: "/assets/ads/festive.png", link : "https://www.merriam-webster.com/dictionary/freak", newTab : "true" }
 
 function GetRandomAdInfo() {
-	const size = Object.keys(adDict).length;
-	const num = Math.floor(Math.random() * (size))
+    const size = Object.keys(adDict).length;
+    const num = Math.floor(Math.random() * (size));
 
-	return [adDict[num].src, adDict[num].link, adDict[num].newTab]
+    return [adDict[num].src, adDict[num].link, adDict[num].newTab];
 }
 
 function TinyButton(props: { file: string; destination: string; newtab: boolean; title: string;}) {
-	let navigate = useNavigate();
+    let navigate = useNavigate();
 
-	return (
-		<img className='w-[88px] h-[31px] hover:cursor-pointer' title={`${props.title}`} src={`${props.file}`} onClick={() => `${props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)}`}/>
-	)
+    return (
+        <img className='w-[88px] h-[31px] hover:cursor-pointer' title={`${props.title}`} src={`${props.file}`} onClick={() => `${props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)}`}/>
+    );
 }
 
 function MainPage() {
-	let navigate = useNavigate();
-	const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
+    let navigate = useNavigate();
+    const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
 
-	return (
-		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
-			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
-				<h1>kart.cat</h1>
-				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
-			</div>
-			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
-			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
-				welcome to kart.cat... some cool stuff may be here... eventually...
-			</div>
-			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<Directory/>
-					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+    return (
+        <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
+            <div className='flex h-16 md:h-20 max-w-7xl w-full text-(--kart-color) text-[28px] md:text-[50px] font-bold flex-row gap-3 md:gap-5 items-center px-2 shrink-0'>
+                <h1>kart.cat</h1>
+                <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
+            </div>
+            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+                welcome to kart.cat... some cool stuff may be here... eventually...
+            </div>
+            <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
+                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
+                    <Directory/>
+                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
-					<a>this is my awesome site... except i have practically nothing to put here... yet...</a>
-					<br/>
-					<br/> {/* i HAVE to find a better way to do ts */}
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
-					<a>i was bored</a>
-					<br/>
-					<br/>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why does it look like this</h1>
-					<a>i was bored</a>
-					<br/>
-					<br/>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What do I do here?</h1>
-					<a>welcome to kart cat... this is kart cat... welcome... this is kart cat, welcome, to kart cat... you can do anything at kart cat... anything at all... the only limit is yourself... welcome... to kart cat... welcome, to kart CAT... this IS kart CAT... WELCOME... to KART cat...</a>
-					<br/>
-					<br/>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
-					<a>heres a cat picture i like a lot (you may need to zoom in)</a>
-					<img className='h-[40px] w-[60px]' src='/assets/images/norman.jpg'/>
-					<a>courtesy of norman</a>
-					<br/>
-					<br/>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Help</h1>
-					<p className='whitespace-break-spaces'>
-						{"just click on stuff something will happen probably\n\nprobably"}
-					</p>
-				</div>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					{adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                </div>
+                <div className='flex-1 bg-white p-2 flex-col border-r-0 md:border-l-3 md:border-r-3 border-solid border-black text-[14px] md:text-[18px]'>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What?</h1>
+                    <p>this is my awesome site... except i have practically nothing to put here... yet...</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>Why?</h1>
+                    <p>i was bored</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>Why does it look like this</h1>
+                    <p>i was bored</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What do I do here?</h1>
+                    <p>welcome to kart cat... this is kart cat... welcome... this is kart cat, welcome, to kart cat... you can do anything at kart cat... anything at all... the only limit is yourself... welcome... to kart cat... welcome, to kart CAT... this IS kart CAT... WELCOME... to KART cat...</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What?</h1>
+                    <p>heres a cat picture i like a lot (you may need to zoom in)</p>
+                    <img className='h-[40px] w-[60px]' src='/assets/images/norman.jpg'/>
+                    <p>courtesy of norman</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>Help</h1>
+                    <p className='whitespace-break-spaces'>
+                        {"just click on stuff something will happen probably\n\nprobably"}
+                    </p>
+                </div>
+                <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
+                    {adList.slice(1, 2).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-			</div>
-		</div>
-	);
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function Ads() {
@@ -160,30 +146,29 @@ function Ads() {
     const adList = useMemo(() => Array.from({ length: 4 }, GetRandomAdInfo), []);
 
     return (
-        <div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
-            <div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+        <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
+            <div className='flex h-16 md:h-20 max-w-7xl w-full text-(--kart-color) text-[28px] md:text-[50px] font-bold flex-row gap-3 md:gap-5 items-center px-2 shrink-0'>
                 <h1>kart.cat &gt; ads</h1>
-                <img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
+                <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
             </div>
-            <div className='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
-            <div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
                 cool info about the "ads" on the site...
             </div>
-            <div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
-                <div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+            <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
+                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
                     {adList.slice(0, 2).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
-                <div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
-                    <h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
+                <div className='flex-1 bg-white p-2 flex-col border-r-0 md:border-l-3 md:border-r-3 border-solid border-black text-[14px] md:text-[18px]'>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What?</h1>
                     <p>the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, etc. no you cannot have an ad</p>
                     <br/>
-                    <h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>Why?</h1>
                     <p>i felt like it</p>
                 </div>
-                <div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+                <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
                     {adList.slice(2, 4).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
@@ -194,133 +179,126 @@ function Ads() {
 }
 
 function About() {
-	let navigate = useNavigate();
-	const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
+    let navigate = useNavigate();
+    const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
 
-	return (
-		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
-			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
-				<h1>kart.cat &gt; about</h1>
-				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
-			</div>
-			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
-			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
-				hello thats me...
-			</div>
-			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<Directory/>
-					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+    return (
+        <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
+            <div className='flex h-16 md:h-20 max-w-7xl w-full text-(--kart-color) text-[28px] md:text-[50px] font-bold flex-row gap-3 md:gap-5 items-center px-2 shrink-0'>
+                <h1>kart.cat &gt; about</h1>
+                <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
+            </div>
+            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+                hello thats me...
+            </div>
+            <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
+                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
+                    <Directory/>
+                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>hello</h1>
-					<p className='whitespace-break-spaces'>
-						{"hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)\ni do stuff in unity, godot, roblox studio, blender, and pretty much anything but unreal sometimes"}
-					</p>
-					<br/>
-					<p>
-						and thats IT... literally theres nothing else
-					</p>
-					<p className='whitespace-break-spaces'>{"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngenuinely"}</p>
-				</div>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					{adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                </div>
+                <div className='flex-1 bg-white p-2 flex-col border-r-0 md:border-l-3 md:border-r-3 border-solid border-black text-[14px] md:text-[18px]'>
+                    <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>hello</h1>
+                    <p className='whitespace-break-spaces'>
+                        {"hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)\ni do stuff in unity, godot, roblox studio, blender, and pretty much anything but unreal sometimes"}
+                    </p>
+                    <br/>
+                    <p>
+                        and thats IT... literally theres nothing else
+                    </p>
+                </div>
+                <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
+                    {adList.slice(1, 2).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-			</div>
-		</div>
-	)
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function Links() {
-	let navigate = useNavigate();
-	const adList = useMemo(() => Array.from({ length: 3 }, GetRandomAdInfo), []);
+    let navigate = useNavigate();
+    const adList = useMemo(() => Array.from({ length: 3 }, GetRandomAdInfo), []);
 
-	return (
-		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
-			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
-				<h1>kart.cat &gt; links</h1>
-				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
-			</div>
-			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
-			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
-				cool things and people and things...
-			</div>
-			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<Directory/>
-					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+    return (
+        <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
+            <div className='flex h-16 md:h-20 max-w-7xl w-full text-(--kart-color) text-[28px] md:text-[50px] font-bold flex-row gap-3 md:gap-5 items-center px-2 shrink-0'>
+                <h1>kart.cat &gt; links</h1>
+                <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
+            </div>
+            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+                cool things and people and things...
+            </div>
+            <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
+                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
+                    <Directory/>
+                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-				<div className='w-full h-full bg-white flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
-					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
-						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>me</h1>
-						<div className='flex flex-row items-center justify-self gap-5'>
-							<TinyButton file='/assets/badges/awesomecord.png' title='discord' destination='https://discord.com/users/361575984639770625' newtab={true}/>
-							<TinyButton file='/assets/badges/thetwitter.png' title='twitter' destination='https://twitter.com/kartdoesstuff' newtab={true}/>
-							<TinyButton file='/assets/badges/thegithub.png' title='github' destination='https://github.com/kartcs' newtab={true}/>
-						</div>
-					</div>
-					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
-						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>the goats</h1>
-						<div className='flex flex-row items-center justify-self gap-5'>
-							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={true}/>
-						</div>
-					</div>
-					<div className='w-full h-full p-2 items-center justify-center flex flex-col'>
-						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>i dont have anything else to put here</h1>
-						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>maybe when i put friends stuff idk</h1>
-					</div>
-				</div>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					{adList.slice(1, 3).map(([file, destination, newTab], index) => (
+                </div>
+                <div className='flex-1 bg-white flex-col border-r-0 md:border-l-3 md:border-r-3 border-solid border-black text-[14px] md:text-[18px]'>
+                    <div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+                        <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>me</h1>
+                        <div className='flex flex-row items-center gap-2 md:gap-5 flex-wrap justify-center'>
+                            <TinyButton file='/assets/badges/awesomecord.png' title='discord' destination='https://discord.com/users/361575984639770625' newtab={true}/>
+                            <TinyButton file='/assets/badges/thetwitter.png' title='twitter' destination='https://twitter.com/kartdoesstuff' newtab={true}/>
+                            <TinyButton file='/assets/badges/thegithub.png' title='github' destination='https://github.com/kartcs' newtab={true}/>
+                        </div>
+                    </div>
+                    <div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+                        <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>the goats</h1>
+                        <div className='flex flex-row items-center gap-5'>
+                            <TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={true}/>
+                        </div>
+                    </div>
+                </div>
+                <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
+                    {adList.slice(1, 3).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
-				</div>
-			</div>
-		</div>
-	)
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function ItisI() {
-	let navigate = useNavigate();
+    let navigate = useNavigate();
 
-	return (
-		<div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black'>
-			<div className='bg-[url(/assets/images/itisi.jpg)] h-[500px] w-[500px] bg-contain' title='itisi.jpg'/>
-			<a className='hover:cursor-pointer text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
-		</div>
-	)
+    return (
+        <div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black p-4'>
+            <div className='bg-[url(/assets/images/itisi.jpg)] h-[300px] w-[300px] md:h-[500px] md:w-[500px] bg-contain bg-no-repeat bg-center' title='itisi.jpg'/>
+            <a className='hover:cursor-pointer text-[24px] md:text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
+        </div>
+    );
 }
 
 function NotFound() {
-	let navigate = useNavigate();
+    let navigate = useNavigate();
 
-	return (
-		<div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black'>
-			<img src='https://http.cat/images/404.jpg'/>
-			<a className='hover:cursor-pointer text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
-		</div>
-	)
+    return (
+        <div className='flex w-screen h-screen items-center justify-center flex-col gap-5 bg-black p-4'>
+            <img className='max-w-full h-auto' src='https://http.cat/images/404.jpg'/>
+            <a className='hover:cursor-pointer text-[24px] md:text-[36px] text-[#0000FF] underline' title='why are you here' onClick={() => navigate(-1)}>go back</a>
+        </div>
+    );
 }
 
 function App() {
-	return (
-		<HashRouter>
-			<Routes>
-				<Route path="/" element={<MainPage/>}/>
-				<Route path="/About" element={<About/>}/>
-				<Route path="/Ads" element={<Ads/>}/>
-				<Route path="/Links" element={<Links/>}/>
-				<Route path="/itisi" element={<ItisI/>}/>
-				<Route path="*" element={<NotFound/>}/>
-			</Routes>
-		</HashRouter>
-	)
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<MainPage/>}/>
+                <Route path="/About" element={<About/>}/>
+                <Route path="/Ads" element={<Ads/>}/>
+                <Route path="/Links" element={<Links/>}/>
+                <Route path="/itisi" element={<ItisI/>}/>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+        </HashRouter>
+    );
 }
 
 root.render(<App/>);
