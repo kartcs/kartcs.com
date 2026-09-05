@@ -1,6 +1,6 @@
-import React, { useState, Suspense } from 'react';
+import React, { useMemo, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import { HashRouter, Route, Routes, useNavigate } from "react-router";
 import './App.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -29,17 +29,63 @@ function Directory() {
 	);
 }
 
-function VerticalAd(props: { file: string; destination: string;}) {
-	let navigate = useNavigate();
+function VerticalAd(props: { file: string; destination: string; newtab?: boolean }) {
+    let navigate = useNavigate();
 
-	return (
-		<div className='h-[240px] w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain'>
-			<img className='w-full h-full hover:cursor-pointer' onClick={() => navigate(`${props.destination}`)} src={`${props.file}`}/>
-			<div className='w-fit h-fit text-[10px] hover:cursor-pointer' onClick={() => navigate("/Ads")}>
-				ad
-			</div>
-		</div>
-	)
+    return (
+        <div className='h-[240px] w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain'>
+            <img 
+                className='w-full h-full hover:cursor-pointer' 
+                onClick={() => props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)} 
+                src={props.file}
+            />
+            <div className='w-fit h-fit text-[10px] hover:cursor-pointer' onClick={() => navigate("/Ads")}>
+                ad
+            </div>
+        </div>
+    );
+}
+
+interface IAd {
+	src: string;
+	link: string;
+	newTab: string;
+}
+
+function stringToBool(str: string): boolean {
+	return str.toLowerCase() === 'true';
+}
+
+// there is most certainly a better way to do this
+
+const adDict: { [id: number] : IAd; } = {};
+adDict[0] = { src: "/assets/ads/incomplete.png", link : "/incomplete", newTab : "false" }
+adDict[1] = { src: "/assets/ads/somethingbig.png", link : "/incomplete", newTab : "false" }
+adDict[2] = { src: "/assets/ads/coolad.png", link : "/incomplete", newTab : "false" }
+adDict[3] = { src: "/assets/ads/imsoorange.png", link : "/incomplete", newTab : "false" }
+adDict[4] = { src: "/assets/ads/hexagonforce.png", link : "/incomplete", newTab : "false" }
+adDict[5] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+adDict[6] = { src: "/assets/ads/jail.png", link : "/incomplete", newTab : "false" }
+adDict[7] = { src: "/assets/ads/grub.png", link : "/incomplete", newTab : "false" }
+adDict[8] = { src: "/assets/ads/okay.png", link : "/incomplete", newTab : "false" }
+adDict[9] = { src: "/assets/ads/sideways.png", link : "/incomplete", newTab : "false" }
+adDict[10] = { src: "/assets/ads/coolios.png", link : "https://coolios.artstation.com/", newTab : "true" }
+adDict[11] = { src: "/assets/ads/40c.png", link : "/incomplete", newTab : "false" }
+adDict[12] = { src: "/assets/ads/commatose.png", link : "/incomplete", newTab : "false" }
+adDict[13] = { src: "/assets/ads/unreal.png", link : "/incomplete", newTab : "false" }
+// adDict[14] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[15] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[16] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[17] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[18] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[19] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+// adDict[20] = { src: "/assets/ads/winbig.png", link : "/incomplete", newTab : "false" }
+
+function GetRandomAdInfo() {
+	const size = Object.keys(adDict).length;
+	const num = Math.floor(Math.random() * (size))
+
+	return [adDict[num].src, adDict[num].link, adDict[num].newTab]
 }
 
 function TinyButton(props: { file: string; destination: string; newtab: boolean; title: string;}) {
@@ -52,6 +98,7 @@ function TinyButton(props: { file: string; destination: string; newtab: boolean;
 
 function MainPage() {
 	let navigate = useNavigate();
+	const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
 
 	return (
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
@@ -66,7 +113,9 @@ function MainPage() {
 			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
 					<Directory/>
-					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
@@ -92,13 +141,14 @@ function MainPage() {
 					<br/>
 					<br/>
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Help</h1>
-					<a>just click on stuff something will happen probably</a>
-					<br/>
-					<br/>
-					<a>probably</a>
+					<p className='whitespace-break-spaces'>
+						{"just click on stuff something will happen probably\n\nprobably"}
+					</p>
 				</div>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+					{adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 			</div>
 		</div>
@@ -106,43 +156,46 @@ function MainPage() {
 }
 
 function Ads() {
-	let navigate = useNavigate();
+    let navigate = useNavigate();
+    const adList = useMemo(() => Array.from({ length: 4 }, GetRandomAdInfo), []);
 
-	return (
-		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
-			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
-				<h1>kart.cat &gt; ads</h1>
-				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
-			</div>
-			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
-			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
-				cool info about the "ads" on the site...
-			</div>
-			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<Directory/>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
-					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
-				</div>
-				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
-					<a>the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, etc. no you cannot have an ad</a>
-					<br/>
-					<br/> {/* kill them all */}
-					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
-					<a>i felt like it</a>
-				</div>
-				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/About'/>
-				</div>
-			</div>
-		</div>
-	)
+    return (
+        <div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
+            <div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
+                <h1>kart.cat &gt; ads</h1>
+                <img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
+            </div>
+            <div className='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
+            <div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
+                cool info about the "ads" on the site...
+            </div>
+            <div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
+                <div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+                    <Directory/>
+                    {adList.slice(0, 2).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
+                </div>
+                <div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
+                    <h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
+                    <p>the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, etc. no you cannot have an ad</p>
+                    <br/>
+                    <h1 className='text-(--kart-color) text-[30px] font-bold italic'>Why?</h1>
+                    <p>i felt like it</p>
+                </div>
+                <div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
+                    {adList.slice(2, 4).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function About() {
 	let navigate = useNavigate();
+	const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
 
 	return (
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
@@ -157,44 +210,25 @@ function About() {
 			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
 					<Directory/>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 				<div className='w-full h-full bg-white p-2 flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>hello</h1>
-					<a>hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)</a>
+					<p className='whitespace-break-spaces'>
+						{"hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)\ni do stuff in unity, godot, roblox studio, blender, and pretty much anything but unreal sometimes"}
+					</p>
 					<br/>
-					<a>i do stuff in unity, godot, roblox studio, blender, and pretty much anything but unreal sometimes</a>
-					<br/>
-					<br/>
-					<a>and thats IT... literally theres nothing else</a>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/> {/* DUDE */}
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
-					<a>genuinely</a>
+					<p>
+						and thats IT... literally theres nothing else
+					</p>
+					<p className='whitespace-break-spaces'>{"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngenuinely"}</p>
 				</div>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
+					{adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 			</div>
 		</div>
@@ -203,6 +237,7 @@ function About() {
 
 function Links() {
 	let navigate = useNavigate();
+	const adList = useMemo(() => Array.from({ length: 3 }, GetRandomAdInfo), []);
 
 	return (
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
@@ -217,7 +252,9 @@ function Links() {
 			<div className='flex w-full max-w-300 min-w-100 h-800 bg-white flex-row items-center'>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
 					<Directory/>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+					{adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 				<div className='w-full h-full bg-white flex-col border-l-3 border-r-3 border-solid border-black text-[18px]'>
 					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
@@ -228,27 +265,21 @@ function Links() {
 							<TinyButton file='/assets/badges/thegithub.png' title='github' destination='https://github.com/kartcs' newtab={true}/>
 						</div>
 					</div>
-					{/* <div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
 						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>the goats</h1>
 						<div className='flex flex-row items-center justify-self gap-5'>
-							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={false}/>
-							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={false}/>
+							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={true}/>
 						</div>
 					</div>
-					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
-						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>other things</h1>
-						<div className='flex flex-row items-center justify-self gap-5'>
-							<TinyButton file='/assets/badges/88x31.gif' title='88x31 resource (very cool (except i didnt use any))' destination='https://cyber.dabamos.de/88x31/index.html' newtab={true}/>
-						</div>
-					</div> */}
 					<div className='w-full h-full p-2 items-center justify-center flex flex-col'>
 						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>i dont have anything else to put here</h1>
 						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>maybe when i put friends stuff idk</h1>
 					</div>
 				</div>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
-					<VerticalAd file='/assets/ads/incomplete.png' destination='/incomplete'/>
-					<VerticalAd file='/assets/ads/coolad.png' destination='/incomplete'/>
+					{adList.slice(1, 3).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
 				</div>
 			</div>
 		</div>
@@ -279,7 +310,7 @@ function NotFound() {
 
 function App() {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
 				<Route path="/" element={<MainPage/>}/>
 				<Route path="/About" element={<About/>}/>
@@ -288,7 +319,7 @@ function App() {
 				<Route path="/itisi" element={<ItisI/>}/>
 				<Route path="*" element={<NotFound/>}/>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	)
 }
 
