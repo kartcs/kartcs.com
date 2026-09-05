@@ -57,7 +57,7 @@ function MainPage() {
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
 			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
 				<h1>kart.cat</h1>
-				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
 			</div>
 			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
 			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
@@ -87,7 +87,9 @@ function MainPage() {
 					<br/>
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>What?</h1>
 					<a>heres a cat picture i like a lot (you may need to zoom in)</a>
-					<img className='h-[40px] w-[60px]' src='https://pbs.twimg.com/media/HDFhnTKWIAAaJwj?format=jpg&name=900x900'/>
+					<img className='h-[40px] w-[60px]' src='/assets/images/norman.jpg'/>
+					<a>courtesy of norman</a>
+					<br/>
 					<br/>
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>Help</h1>
 					<a>just click on stuff something will happen probably</a>
@@ -110,7 +112,7 @@ function Ads() {
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
 			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
 				<h1>kart.cat &gt; ads</h1>
-				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
 			</div>
 			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
 			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
@@ -146,7 +148,7 @@ function About() {
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
 			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
 				<h1>kart.cat &gt; about</h1>
-				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
 			</div>
 			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
 			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
@@ -206,7 +208,7 @@ function Links() {
 		<div className='flex flex-col bg-black justify-center items-center w-screen h-screen'>
 			<div className='flex h-20 max-w-300 w-full min-w-100 text-(--kart-color) top-0 text-[50px] font-bold flex-row gap-5 items-center'>
 				<h1>kart.cat &gt; links</h1>
-				<img className='h-[50px] w-[50px]' src='https://pbs.twimg.com/media/HBGQAdjX0AADBnc?format=jpg&name=large'/>
+				<img className='h-[50px] w-[50px]' src='/assets/images/awesomecat.jpg'/>
 			</div>
 			<div className ='h-50 w-100 bg-[url(/assets/images/karttext.gif)] absolute top-0 bg-contain invisible' />
 			<div className='flex flex-row w-full max-w-300 min-w-100 h-fit bg-white bg-origin-border bg-contain p-2 grid-rows gap-7 border-b-3 border-black'>
