@@ -161,7 +161,7 @@ function About() {
 					<h1 className='text-(--kart-color) text-[30px] font-bold italic'>hello</h1>
 					<a>hey hi hello its me kart/karter/kartcat/kartcs idk (18 and trapped in texas)</a>
 					<br/>
-					<a>i do unity and blender stuff sometimes (like very rarely)</a>
+					<a>i do stuff in unity, godot, roblox studio, blender, and pretty much anything but unreal sometimes</a>
 					<br/>
 					<br/>
 					<a>and thats IT... literally theres nothing else</a>
@@ -222,14 +222,15 @@ function Links() {
 						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>me</h1>
 						<div className='flex flex-row items-center justify-self gap-5'>
 							<TinyButton file='/assets/badges/awesomecord.png' title='discord' destination='https://discord.com/users/361575984639770625' newtab={true}/>
-							<TinyButton file='/assets/badges/thetwitter.png' title='twitter' destination='https://twitter.com/kartdoesunity' newtab={true}/>
+							<TinyButton file='/assets/badges/thetwitter.png' title='twitter' destination='https://twitter.com/kartdoesstuff' newtab={true}/>
 							<TinyButton file='/assets/badges/thegithub.png' title='github' destination='https://github.com/kartcs' newtab={true}/>
 						</div>
 					</div>
-					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
+					{/* <div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
 						<h1 className='text-(--kart-color) text-[30px] font-bold italic'>the goats</h1>
 						<div className='flex flex-row items-center justify-self gap-5'>
-							<TinyButton file='/assets/badges/sadiead.gif' title='sadie my goat' destination='https://sadie.cat' newtab={true}/>
+							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={false}/>
+							<TinyButton file='/assets/badges/coolios.gif' title='coolios' destination='https://coolios.artstation.com/' newtab={false}/>
 						</div>
 					</div>
 					<div className='w-full border-b-3 border-black p-2 items-center justify-center flex flex-col'>
@@ -237,9 +238,10 @@ function Links() {
 						<div className='flex flex-row items-center justify-self gap-5'>
 							<TinyButton file='/assets/badges/88x31.gif' title='88x31 resource (very cool (except i didnt use any))' destination='https://cyber.dabamos.de/88x31/index.html' newtab={true}/>
 						</div>
-					</div>
+					</div> */}
 					<div className='w-full h-full p-2 items-center justify-center flex flex-col'>
 						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>i dont have anything else to put here</h1>
+						<h1 className='text-[#F0F0F0] text-[30px] font-bold italic'>maybe when i put friends stuff idk</h1>
 					</div>
 				</div>
 				<div className='flex items-center w-[200px] h-full bg-white p-2 flex-col gap-10'>
