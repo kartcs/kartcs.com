@@ -90,7 +90,9 @@ function TinyButton(props: { file: string; destination: string; newtab: boolean;
 
 function MainPage() {
     let navigate = useNavigate();
-    const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
+	const adCt = Math.floor(Math.random() * 4) + 1
+	const split = Math.floor(adCt/2)
+    const adList = useMemo(() => Array.from({ length: adCt }, GetRandomAdInfo), []);
 
     return (
         <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
@@ -104,7 +106,7 @@ function MainPage() {
             <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
                 <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
-                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                    {adList.slice(0, split).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -132,7 +134,7 @@ function MainPage() {
                     </p>
                 </div>
                 <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
-                    {adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                    {adList.slice(split, adCt).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -143,7 +145,9 @@ function MainPage() {
 
 function Ads() {
     let navigate = useNavigate();
-    const adList = useMemo(() => Array.from({ length: 4 }, GetRandomAdInfo), []);
+	const adCt = Math.floor(Math.random() * 4) + 1
+	const split = Math.floor(adCt/2)
+    const adList = useMemo(() => Array.from({ length: adCt }, GetRandomAdInfo), []);
 
     return (
         <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
@@ -157,7 +161,7 @@ function Ads() {
             <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
                 <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
-                    {adList.slice(0, 2).map(([file, destination, newTab], index) => (
+                    {adList.slice(0, split).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -169,7 +173,7 @@ function Ads() {
                     <p>i felt like it</p>
                 </div>
                 <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
-                    {adList.slice(2, 4).map(([file, destination, newTab], index) => (
+                    {adList.slice(split, adCt).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -180,7 +184,9 @@ function Ads() {
 
 function About() {
     let navigate = useNavigate();
-    const adList = useMemo(() => Array.from({ length: 2 }, GetRandomAdInfo), []);
+	const adCt = Math.floor(Math.random() * 4) + 1
+	const split = Math.floor(adCt/2)
+    const adList = useMemo(() => Array.from({ length: adCt }, GetRandomAdInfo), []);
 
     return (
         <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
@@ -194,7 +200,7 @@ function About() {
             <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
                 <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
-                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                    {adList.slice(0, split).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -209,7 +215,7 @@ function About() {
                     </p>
                 </div>
                 <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
-                    {adList.slice(1, 2).map(([file, destination, newTab], index) => (
+                    {adList.slice(split, adCt).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -220,7 +226,9 @@ function About() {
 
 function Links() {
     let navigate = useNavigate();
-    const adList = useMemo(() => Array.from({ length: 3 }, GetRandomAdInfo), []);
+	const adCt = Math.floor(Math.random() * 4) + 1
+	const split = Math.floor(adCt/2)
+    const adList = useMemo(() => Array.from({ length: adCt }, GetRandomAdInfo), []);
 
     return (
         <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
@@ -234,7 +242,7 @@ function Links() {
             <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
                 <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
-                    {adList.slice(0, 1).map(([file, destination, newTab], index) => (
+                    {adList.slice(0, split).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -255,7 +263,42 @@ function Links() {
                     </div>
                 </div>
                 <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
-                    {adList.slice(1, 3).map(([file, destination, newTab], index) => (
+                    {adList.slice(split, adCt).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function Projects() {
+	let navigate = useNavigate();
+	const adCt = Math.floor(Math.random() * 4) + 1
+	const split = Math.floor(adCt/2)
+    const adList = useMemo(() => Array.from({ length: adCt }, GetRandomAdInfo), []);
+
+    return (
+        <div className='flex flex-col bg-black justify-start items-center w-full min-h-screen'>
+            <div className='flex h-16 md:h-20 max-w-7xl w-full text-(--kart-color) text-[28px] md:text-[50px] font-bold flex-row gap-3 md:gap-5 items-center px-2 shrink-0'>
+                <h1>kart.cat &gt; projects</h1>
+                <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
+            </div>
+            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+                things that ive brought into the world for better or for worse
+            </div>
+            <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
+                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
+                    <Directory/>
+                    {adList.slice(0, split).map(([file, destination, newTab], index) => (
+                        <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                    ))}
+                </div>
+                <div className='flex-1 bg-white flex-col border-r-0 md:border-l-3 md:border-r-3 border-solid border-black text-[14px] md:text-[18px]'>
+                    
+                </div>
+                <div className='hidden md:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0'>
+                    {adList.slice(split, adCt).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
                     ))}
                 </div>
@@ -293,6 +336,7 @@ function App() {
                 <Route path="/" element={<MainPage/>}/>
                 <Route path="/About" element={<About/>}/>
                 <Route path="/Ads" element={<Ads/>}/>
+				<Route path="/Projects" element={<Projects/>}/>
                 <Route path="/Links" element={<Links/>}/>
                 <Route path="/itisi" element={<ItisI/>}/>
                 <Route path="*" element={<NotFound/>}/>
