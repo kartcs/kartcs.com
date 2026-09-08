@@ -293,7 +293,7 @@ function Projects() {
 
 function ProjectsUnfinished() {
     let navigate = useNavigate();
-	const adCt = Math.floor(Math.random() * 3) + 2
+	const adCt = Math.floor(Math.random() * 5) + 2
 	const split = Math.ceil(adCt/2)
 
     useScrollToHash()
@@ -348,7 +348,7 @@ function ProjectsUnfinished() {
             <br/>
 
             <h1 id='cargame' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>car game (2023)</h1>
-            <img src="/assets/images/games/cargame/menustatic.png" className='float-right w-100 m-3 h-fit border-2 border-black' title='menu'/>
+            <img src="/assets/images/games/cargame/menustatic.png" className='float-right w-60 md:w-100 m-2 h-fit border-2 border-black' title='menu'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"despite it being the first (non vr) game of MANY, theres really not much going for it i fear\n\
                 its kinda just the ultimate 5 minutes of gameplay gamejolt horror game... nothingburger...\n\
@@ -358,7 +358,7 @@ function ProjectsUnfinished() {
                 the gameplay is walk around and press e twice and i wish i was joking"}
             </p>
             <br/>
-            <img src="/assets/images/games/cargame/nolighting.png" className='float-left w-80 m-3 h-fit border-2 border-black' title='unlit'/>
+            <img src="/assets/images/games/cargame/nolighting.png" className='float-left w-60 md:w-80 m-2 h-fit border-2 border-black' title='unlit'/>
             <br/>
             <p className='text-[16px] whitespace-pre-line'>
                 {"as for style... it didnt really have any going for it either... it was retroslop from the start\n\
@@ -371,7 +371,7 @@ function ProjectsUnfinished() {
             <br/>
 
             <h1 id='backroom' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>ballsrooms (2023)</h1>
-            <img src="/assets/images/games/backroom/hallway.png" className='float-right w-100 m-3 h-fit border-2 border-black' title='hallway (level 2)'/>
+            <img src="/assets/images/games/backroom/hallway.png" className='float-right w-60 md:w-100 m-2 h-fit border-2 border-black' title='hallway (level 2)'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"the legally mandated really poorly made backrooms game, except i didnt finish mine!!\n\
                 the running theory as to why it was discontinued is that i couldnt figure out how to\
@@ -384,7 +384,7 @@ function ProjectsUnfinished() {
                 at one point in the discord servers existence, i quite literally just said 'yeah no' and archived everything immediately, kicking everyone\
                 who was in the server for whatever reason... not sure what that guys deal was!"}
             </p>
-            <img src="/assets/images/games/backroom/storage.png" className='float-left w-100 m-3 mb-0 h-fit border-2 border-black' title='warehouse (level 1)'/>
+            <img src="/assets/images/games/backroom/storage.png" className='float-left w-60 md:w-100 m-2 mb-0 h-fit border-2 border-black' title='warehouse (level 1)'/>
             <br/>
             <p className="text-[16px] whitespace-pre-line">
                 {"i only got four floors done before i dropped it, and said floors are so small and non complex that you can beat the game in less than a minute.\
@@ -399,7 +399,7 @@ function ProjectsUnfinished() {
             <br/>
 
             <h1 id='shower' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>shower (2023)</h1>
-            <img src="/assets/images/games/shower/washing.png" className='float-right w-100 m-3 h-fit border-2 border-black' title='menu'/>
+            <img src="/assets/images/games/shower/washing.png" className='float-right w-60 md:w-100 m-2 h-fit border-2 border-black' title='menu'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"i have almost nothing to say about this one, as it was practically a particle test and modeling practice\n\
                 the only real thing of note is that its modeled after my old bathroom before it got renovated\n\n\
@@ -410,7 +410,7 @@ function ProjectsUnfinished() {
             <br/>
 
             <h1 id='tod' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>T.O.D. (2023)</h1>
-            <img src="/assets/images/games/tod/menu.png" className='float-left w-80 m-3 mt-0 ml-0 h-fit border-2 border-black' title='tod menu'/>
+            <img src="/assets/images/games/tod/menu.png" className='float-left w-60 md:w-80 m-2 mt-0 ml-0 h-fit border-2 border-black' title='tod menu'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"T.O.D. (Tods Of Death) was a game i made based on an inside joke between like 10 people. \n\
                 then i proceeded to spend 4 months too many on it.\n\
@@ -418,7 +418,7 @@ function ProjectsUnfinished() {
                 the 'final state' of the game is strangely solid despite it being VERY early into my unity dev period... \n\n"}
             </p>
             <br/>
-            <img src="/assets/images/games/tod/radar.png" className='float-right w-100 m-3 h-fit border-2 border-black' title='radar'/>
+            <img src="/assets/images/games/tod/radar.png" className='float-right w-60 md:w-100 m-2 h-fit border-2 border-black' title='radar'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"the main gameplay loop is:\n\
                 - start a level\n\
@@ -433,7 +433,7 @@ function ProjectsUnfinished() {
                 there were also utility items you could use to fend off the tods, such as a landmine, or to help yourself, like the radar or flashlight.\n\
                 the game also featured saferooms that would pause the timer, but make the tods go back to wandering for a while.\n"}
             </p>
-            <img src="/assets/images/games/tod/gameplay.gif" className='float-left w-110 m-3 h-fit border-2 border-black' title='old CHAOS mode (all tods)'/>
+            <img src="/assets/images/games/tod/gameplay.gif" className='float-left w-60 md:w-110 m-2 h-fit border-2 border-black' title='old CHAOS mode (all tods)'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"overall, kinda proud of myself with this one, especially for the time. my only regret is not knowing how to do visuals at this point,\
                 so it uses the base unity srp rendering pipeline with almost no changes to anything. no post, no lighting, nothing.\n\n\
@@ -447,7 +447,7 @@ function ProjectsUnfinished() {
             <br/>
 
             <h1 id='afterhours' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>after hours (2023)</h1>
-            <img src="/assets/images/games/afterhours/room.png" className='float-right w-110 m-3 h-fit border-2 border-black' title='store entrance'/>
+            <img src="/assets/images/games/afterhours/room.png" className='float-right w-60 md:w-110 m-2 h-fit border-2 border-black' title='store entrance'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"your eyes do not decieve you. that is a tj maxx HORROR game.\n\
                 \n\
@@ -456,7 +456,7 @@ function ProjectsUnfinished() {
                 with custom markdown and everything.\n\
                 not so surprisingly if you know him, he lost his job before i finished the game, which is INCREDIBLY funny (again, if you know him)"}
             </p>
-            <img src="/assets/images/games/afterhours/checkout.png" className='float-left w-100 m-3 h-fit border-2 border-black' title='checkout'/>
+            <img src="/assets/images/games/afterhours/checkout.png" className='float-left w-60 md:w-100 m-2 h-fit border-2 border-black' title='checkout'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"dialogue isnt the only thing going for it though. this was also the first attempt of many to write my own movement.\n\
                 not for no reason either, unlike a certain other recreation.... \
@@ -503,7 +503,7 @@ function ProjectsHeartAttack() {
                 {"it was actually really hard to get the mod accepted into the geode mod index initially...\n\
                 the current staff at the time didnt like how originally it had no warning, which is VERY fair looking back on it"}
             </p>
-            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-100 h-47 m-3 border-2 border-black' title='MORON'/>
+            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-100 h-47 m-2 border-2 border-black' title='MORON'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"i also unfortunately asked many stupid questions relating to development \
                 that were very clearly common knowledge.\n\
