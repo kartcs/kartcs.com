@@ -41,11 +41,14 @@ function Shell({ title, subtitle, adCount = 2, adSplit = 1, children }: sProps) 
                 <h1>{title}</h1>
                 <img className='h-[35px] w-[35px] md:h-[50px] md:w-[50px]' src='/assets/images/awesomecat.jpg'/>
             </div>
-            <div className='flex flex-row w-full max-w-7xl text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+            <div className='flex flex-row w-full max-w-7xl text-[12px] sm:text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
                 {subtitle}
             </div>
+            <div className='flex flex-row w-full max-w-7xl visible sm:hidden text-[14px] md:text-[16px] h-fit bg-white p-2 border-b-3 border-black shrink-0'>
+                <Navbar/>
+            </div>
             <div className='flex w-full max-w-7xl bg-white flex-row items-stretch flex-1'>
-                <div className='flex items-center w-[130px] md:w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
+                <div className='hidden sm:flex items-center w-[150px] bg-white p-2 flex-col gap-10 shrink-0 border-r-3 border-black md:border-r-0'>
                     <Directory/>
                     {adList.slice(0, adSplit).map(([file, destination, newTab], index) => (
                         <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
@@ -68,22 +71,64 @@ function Directory() {
     let navigate = useNavigate();
 
     return (
-        <div className='flex w-full p-2 bg-[#FFFFFF] border-3 border-solid border-black h-fit list-disc text-[14px] md:text-[16px] no-underline flex-col gap-1 pl-4 md:pl-6'>
-            <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/")} title='The home page of sorts'>
-                Main
-            </li>
-            <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/About")} title='About me!!'>
-                About me
-            </li>
-            <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/Projects")} title='Things I created or had a hand in bringing into this world'>
-                Projects
-            </li>
-            <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/Links")} title='Things I like and cool people and everything else'>
-                Links
-            </li>
-            <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
-                It is I
-            </li>
+        <div className='flex w-full p-2 bg-[#FFFFFF] border-3 border-solid border-black h-fit text-[16px] no-underline flex-col gap-1'>
+            <p className='font-bold text-[16px]'>Directory</p>
+            <div className='pl-3'>
+                <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/")} title='The home page of sorts'>
+                    Main
+                </li>
+                <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/About")} title='About me!!'>
+                    About me
+                </li>
+                <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/Projects")} title='Things I created or had a hand in bringing into this world'>
+                    Projects
+                </li>
+                <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/Links")} title='Things I like and cool people and everything else'>
+                    Links
+                </li>
+                <li className='hover:cursor-pointer hover:underline text-[#0000FF]' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
+                    It is I
+                </li>
+            </div>
+        </div>
+    );
+}
+
+function Navbar() {
+    let navigate = useNavigate();
+
+    return (
+        <div className='grid grid-cols-3 items-center justify-center place-items-center w-full p-2 bg-[#FFFFFF] h-fit text-[16px] no-underline flex-col gap-2'>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/")} title='The home page of sorts'>
+                <p className='text-[#0000FF]'>
+                    Main
+                </p>
+            </div>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/About")} title='About me!!'>
+                <p className='text-[#0000FF]'>
+                    About me
+                </p>
+            </div>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/Projects")} title='Things I created perhaps'>
+                <p className='text-[#0000FF]'>
+                    Projects
+                </p>
+            </div>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/Links")} title='Things I like and cool people'>
+                <p className='text-[#0000FF]'>
+                    Links
+                </p>
+            </div>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex'>
+                <p className='text-[#000000] text-[10px]'>
+                    filler button
+                </p>
+            </div>
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
+                <p className='text-[#0000FF]'>
+                    It is I
+                </p>
+            </div>
         </div>
     );
 }
@@ -92,7 +137,7 @@ function VerticalAd(props: { file: string; destination: string; newtab?: boolean
     let navigate = useNavigate();
 
     return (
-        <div className='h-[200px] w-[100px] md:h-[240px] md:w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain bg-no-repeat'>
+        <div className='h-[240px] w-[120px] bg-[url(/assets/ads/brokenad.png)] bg-contain bg-no-repeat'>
             <img 
                 className='w-full h-full hover:cursor-pointer object-contain' 
                 onClick={() => props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)} 
@@ -177,7 +222,7 @@ function MainPage() {
 	const split = Math.round(adCt/2)
 
     return (
-        <Shell title="kart.cat" subtitle='welcome to kart.cat... some cool stuff may be here... eventually...' adCount={adCt} adSplit={split}>
+        <Shell title="kart.cat" subtitle='welcome to kart.cat' adCount={adCt} adSplit={split}>
             <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What?</h1>
             <p>this is my awesome site... except i have practically nothing to put here... yet...</p>
             <br/>
@@ -274,7 +319,7 @@ function Projects() {
 	const split = Math.ceil(adCt/2)
 
     return (
-        <Shell title="kart.cat > projects" subtitle='things ive brought into the world for better or for worse' adCount={adCt} adSplit={split}>
+        <Shell title="kart.cat > projects" subtitle='things ive brought into the world' adCount={adCt} adSplit={split}>
             <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>work in progress</h1>
             <p className='whitespace-break-spaces'>
                 {"hey so ive only really ever finished one thing\nso like dont expect much here YET..."}
@@ -299,7 +344,7 @@ function ProjectsUnfinished() {
     useScrollToHash()
 
     return (
-        <Shell title="kart.cat > scrapped" subtitle='things ive withheld from the world for better or for worse' adCount={adCt} adSplit={split}>
+        <Shell title="kart.cat > scrapped" subtitle='things ive withheld from the world for the better' adCount={adCt} adSplit={split}>
             <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>help</h1>
             <p className="text-[16px] whitespace-pre-line">
                 {"this is (and will continue to be) a chronological list of games/tests of mine that were never released to the public (formally)\n\
@@ -503,13 +548,14 @@ function ProjectsHeartAttack() {
                 {"it was actually really hard to get the mod accepted into the geode mod index initially...\n\
                 the current staff at the time didnt like how originally it had no warning, which is VERY fair looking back on it"}
             </p>
-            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-100 h-47 m-2 border-2 border-black' title='MORON'/>
+            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-[100%] sm:w-100 h-fit sm:m-2 border-2 border-black' title='MORON'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"i also unfortunately asked many stupid questions relating to development \
                 that were very clearly common knowledge.\n\
                 and thats why i have the discord server in the credits\n\
                 because i felt really bad for being a moron"}
             </p>
+            <br/>
         </Shell>
     );
 }
