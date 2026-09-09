@@ -119,9 +119,9 @@ function Navbar() {
                     Links
                 </p>
             </div>
-            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex'>
-                <p className='text-[#000000] text-[10px]'>
-                    filler button
+            <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/Ads")} title='wow im purchasing'>
+                <p className='text-[#0000FF]'>
+                    Ads
                 </p>
             </div>
             <div className='w-[100%] h-[100%] border-3 items-center justify-center flex hover:cursor-pointer' onClick={() => navigate("/itisi")} title='random picture i found on twitter i really like it'>
@@ -155,18 +155,18 @@ function GamePreview(props: { thumb: string; destination: string; name: string; 
 
     return (
         <div 
-            className='bg-[#f1f1f1] hover:cursor-pointer h-[380px] w-[256px] border-[5px] border-black flex flex-col justify-start overflow-hidden' 
+            className='bg-[#f1f1f1] hover:cursor-pointer w-[192px] h-[304px] sm:h-[304px] md:h-[324px] lg:h-[384px] lg:w-[232px] border-[5px] border-black flex flex-col justify-start overflow-hidden' 
             onClick={() => props.newtab ? window.open(props.destination, '_blank', 'noopener,noreferrer') : navigate(props.destination)}
         >
             <img 
-                className='h-[256px] w-[256px] object-cover shrink-0' 
+                className='h-fit w-fit object-cover shrink-0' 
                 src={props.thumb}
             />
             <div className='w-full flex-1 p-2 flex flex-col justify-start items-start gap-1 text-left'>
-                <p className='text-[24px] text-(--kart-color) font-bold leading-tight'>
+                <p className='text-[16px] lg:text-[24px] text-(--kart-color) font-bold leading-tight'>
                     {props.name}
                 </p>
-                <p className='whitespace-break-spaces text-[14px] leading-snug'>
+                <p className='whitespace-break-spaces text-[12px] lg:text-[14px] leading-snug'>
                     {props.desc}
                 </p>
             </div>
@@ -250,20 +250,41 @@ function MainPage() {
 
 function Ads() {
     let navigate = useNavigate();
+    const adList = useMemo(() => Array.from({ length: 30 }, GetRandomAdInfo), [0]);
 	const adCt = Math.floor(Math.random() * 3) + 2
 	const split = Math.ceil(adCt/2)
 
     return (
         <Shell title="kart.cat > ads" subtitle='info on the "ads" that plague the site' adCount={adCt} adSplit={split}>
             <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>What?</h1>
-            <p className='whitespace-break-spaces'>
-                {"the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, or, quite often nothing at all...\n\nno you cannot have an ad"}
+            <p className='whitespace-pre-line'>
+                {"the ads are not real ads... rather, they redirect to projects, friends, projects made by friends, or, \
+                quite often nothing at all...\n\n\
+                no you cannot have an ad"}
             </p>
             <br/>
             <h1 className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>Why?</h1>
-            <p className='whitespace-break-spaces'>
+            <p className='whitespace-pre-line'>
                 {"sounded funny"}
             </p>
+            <br className='sm:hidden'/>
+
+            <h1 className='sm:hidden text-[#FF0000] text-[22px] md:text-[30px] font-bold italic'>where</h1>
+            <p className='sm:hidden whitespace-pre-line'>
+                {"sorry, on smaller screens the sidebars are hidden (where the ads usually are).\n\
+                i cannot be bothered to make a layout that works i fear soooo\n\n\
+                heres a ton of ads to look at\n\
+                (refresh to see different ones)"}
+            </p>
+            <br className='sm:hidden'/>
+
+            <div className='grid grid-cols-3 grid-rows-2 justify-center items-center place-items-center w-full gap-4 sm:hidden'>
+                {adList.slice(0, 30).map(([file, destination, newTab], index) => (
+                    <VerticalAd key={index} file={file} destination={destination} newtab={stringToBool(newTab)} />
+                ))}
+            </div>
+            <br className='sm:hidden'/>
+
         </Shell>
     );
 }
@@ -326,7 +347,7 @@ function Projects() {
             </p>
             <br/>
             <div className='w-full h-fit pt-10 items-center justify-center'>
-                <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-rows-auto gap-4">
+                <div className="grid place-items-center grid-cols-2 lg:grid-cols-3 grid-rows-auto gap-4">
                     <GamePreview thumb='/assets/images/games/site/source.png' destination='https://github.com/kartcs/kartcs.com' name="kart.cat" desc="the source of kart.cat (sometimes known as kartcs.com)" newtab={true}/>
                     <GamePreview thumb='/assets/images/games/heartattack/logo.png' destination='/Projects/HeartAttack' name="heart attack" desc="geometry dash mod that KILLS you... evil..." newtab={false}/>
                     <GamePreview thumb='/assets/images/games/tod2/size.png' destination='/Projects/Scrapped' name="scrapped" desc="compilation of 'tests' that probably wont see the light of day" newtab={false}/>
@@ -478,7 +499,7 @@ function ProjectsUnfinished() {
                 there were also utility items you could use to fend off the tods, such as a landmine, or to help yourself, like the radar or flashlight.\n\
                 the game also featured saferooms that would pause the timer, but make the tods go back to wandering for a while.\n"}
             </p>
-            <img src="/assets/images/games/tod/gameplay.gif" className='float-left w-60 md:w-110 m-2 h-fit border-2 border-black' title='old CHAOS mode (all tods)'/>
+            <img src="/assets/images/games/tod/gameplay.gif" className='float-left w-60 md:w-100 m-2 h-fit border-2 border-black' title='old CHAOS mode (all tods)'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"overall, kinda proud of myself with this one, especially for the time. my only regret is not knowing how to do visuals at this point,\
                 so it uses the base unity srp rendering pipeline with almost no changes to anything. no post, no lighting, nothing.\n\n\
@@ -509,15 +530,53 @@ function ProjectsUnfinished() {
                 despite doing all of that, the doors didnt end up working, so you just phase through them in the final version.\n\
                 \n\
                 SHOCKINGLY, thats still not all. the game also had an entire story. it had a start and (kind of) an ending. it didnt have an actual end screen, \
-                but it had the end sequence, whihc is most definitely a first. (i may still not have a game as close to completion as this was...)"}
+                but it had the end sequence, which is most definitely a first. (i may still not have a game as close to completion as this was...)"}
             </p>
             <br/>
 
-            <h1 id='procedural' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>scary-game (2023)</h1>
+            <h1 id='procedural' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>scary-game (2024)</h1>
             <p className="text-[16px] whitespace-pre-line">
-                {"not done writing these, sorry!!!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
+                {"this project was created somewhat soon after lethal company released and exploded in popularity. \
+                thus, as you can guess, it was a procedural dungeon style generation test.\nquite shockingly, i mostly\
+                succeeded??? which isnt hard to do by any means im just actually shocked i did it by ANY metric back then."}
+            </p>
+            <img src="/assets/images/games/scarygame/lostmedias.webp" className='float-right w-60 md:w-110 m-2 h-fit border-2 border-black' title='broken generation'/>
+            <p className='text-[16px] whitespace-pre-line'>
+                {"of course, nothing is perfect, and this project certainly had its issues.\n\
+                most notably, the rooms would intersect VERY often, but i didnt notice for so long because i was testing \
+                with equally sized, same textured rooms.\n\
+                unfortunately, at some point i made some terrible mistakes and couldnt go back before i did that. \
+                i uh, didnt use github or ANY form of version management back then, so its kinda lost media now.\n\
+                \n\
+                i mean yes, i could theoretically go back and fix it with my incredible current knowledge but thats \
+                lame and boring and i dont wanna\n\
+                so this is kinda the ONLY remaining picture of it (in beautiful 240p)"}
+            </p>
+            <br/>
+
+            <h1 id='automata' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>automata (2024)</h1>
+            <img src="/assets/images/games/automata/insanity.png" className='float-right w-60 md:w-130 m-2 h-fit border-2 border-black' title='trello insanity'/>
+            <p className="text-[16px] whitespace-pre-line">
+                {"this ones quite the project... NOT!!\n\
+                i have an ancient trello page for this game, and despite writing approximately 20 paragraphs of ideas and writing for it, \
+                i never ended up doing much of anything in the actual project itself. and i mean that in the most literal sense.\n\
+                the project boils down to ONE (1) shader, and a very small lighting test involving that shader. thats it.\n\
+                \n\
                 "}
             </p>
+            <p className='text-[16px] whitespace-pre-line'>
+                {"given how much effort was put into the writing, i might actually consider returning to the idea (in godot of course), \
+                since after re-reading it, it seems kinda cool??? i still really like the ideas i wrote at 5 AM. im not joking i \
+                wrote all of that at 5 am one night"}
+            </p>
+            <br/>
+
+            <h1 id='voxelspace' className='text-(--kart-color) text-[22px] md:text-[30px] font-bold italic'>voxelspace (2024)</h1>
+            <p className='text-[16px] whitespace-pre-line'>
+                {"not done writing the rest of these yet!! sorry!!\
+                \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}
+            </p>
+            <img src="/assets/images/mycat.jpg" className='float-left w-20 md:w-20 m-2 h-fit border-0 border-black' title='this is my cat'/>
         </Shell>
     );
 }
@@ -548,7 +607,7 @@ function ProjectsHeartAttack() {
                 {"it was actually really hard to get the mod accepted into the geode mod index initially...\n\
                 the current staff at the time didnt like how originally it had no warning, which is VERY fair looking back on it"}
             </p>
-            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-[100%] sm:w-100 h-fit sm:m-2 border-2 border-black' title='MORON'/>
+            <img src="/assets/images/games/heartattack/MORON.png" className='float-right w-[100%] md:w-100 h-fit md:m-2 border-2 border-black' title='MORON'/>
             <p className="text-[16px] whitespace-pre-line">
                 {"i also unfortunately asked many stupid questions relating to development \
                 that were very clearly common knowledge.\n\
